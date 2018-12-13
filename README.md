@@ -8,7 +8,7 @@ Please run:
 After `git clone` of the repository I tried to run `npm install`. After doing this, all installed node_modules were included in the git repository. The `/dist` folder is part of the git sources too. Dist stands for either distribution or build -> usually this is the compiled version of your sources and it shouldn't be part of your git. If you delete `/dist`, your static assets (images, css, ...) are gone. Move you sources away from dist. Dist should be created by running `npm run build`.
 
 - [x] *add node_modules to .gitignore*
-- [ ] *add dist to .gitignore*
+- [x] *add dist to .gitignore*
 - [ ] *move static assets from dist into a sepparate directory, e.g. /src/assets*
 - [ ] *webpack builder should move static assets into dist along the compiled javascript*
 
