@@ -9,8 +9,8 @@ After `git clone` of the repository I tried to run `npm install`. After doing th
 
 - [x] *add node_modules to .gitignore*
 - [x] *add dist to .gitignore*
-- [ ] *move static assets from dist into a sepparate directory, e.g. /src/assets*
-- [ ] *webpack builder should move static assets into dist along the compiled javascript*
+- [x] *move static assets from dist into a sepparate directory, e.g. /src/assets*
+- [x] *webpack builder should move static assets into dist along the compiled javascript*
 
 We will be using [Feature branching](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow). To be able to work on this repository with you:
 
