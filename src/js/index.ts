@@ -59,7 +59,7 @@ elements.searchForm.addEventListener('submit', e => {
 });
 
 
-elements.searchResPages.addEventListener('click', e => {
+elements.searchResPages.addEventListener('click', (e: any) => {
     const btn = e.target.closest('.btn-inline');
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto, 10);
@@ -128,7 +128,7 @@ const controlList = () => {
 }
 
 // Handle delete and update list item events
-elements.shopping.addEventListener('click', e => {
+elements.shopping.addEventListener('click', (e: any) => {
     const id = e.target.closest('.shopping__item').dataset.itemid;
 
     // Handle the delete button
@@ -141,7 +141,7 @@ elements.shopping.addEventListener('click', e => {
 
     // Handle the count update
     } else if (e.target.matches('.shopping__count-value')) {
-        const val = parseFloat(e.target.value, 10);
+        const val = parseFloat(e.target.value);
         state.list.updateCount(id, val);
     }
 });
@@ -199,7 +199,7 @@ window.addEventListener('load', () => {
 
 
 // Handling recipe button clicks
-elements.recipe.addEventListener('click', e => {
+elements.recipe.addEventListener('click', (e: any) => {
     if (e.target.matches('.btn-decrease, .btn-decrease *')) {
         // Decrease button is clicked
         if (state.recipe.servings > 1) {
