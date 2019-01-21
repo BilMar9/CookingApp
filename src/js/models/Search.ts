@@ -2,7 +2,8 @@ import axios from 'axios';
 import { key, proxy } from '../config';
 
 export default class Search {
-    constructor(query) {
+    [x: string]: any;
+    constructor(query: any) {
         this.query = query;
     }
 

@@ -4,7 +4,7 @@ import { Fraction } from 'fractional';
 export const clearRecipe = () => {
     elements.recipe.innerHTML = '';
 };
-const formatCount = count => {
+const formatCount = (count: number) => {
     if (count) {
         // count = 2.5 --> 5/2 --> 2 1/2
         // count = 0.5 --> 1/2
@@ -24,7 +24,7 @@ const formatCount = count => {
     return '?';
 };
 
-const createIngredient = ingredient => `
+const createIngredient = (ingredient: { count: number; unit: any; ingredient: any; })=> `
     <li class="recipe__item">
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
@@ -37,7 +37,7 @@ const createIngredient = ingredient => `
     </li>
 `;
 
-export const renderRecipe = (recipe, isLiked) => {
+export const renderRecipe = (recipe: import("../models/Recipe").default, isLiked: boolean) => {
     const markup = `
         <figure class="recipe__fig">
             <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img">
@@ -84,7 +84,7 @@ export const renderRecipe = (recipe, isLiked) => {
 
         <div class="recipe__ingredients">
             <ul class="recipe__ingredient-list">
-                ${recipe.ingredients.map(el => createIngredient(el)).join('')}
+                ${recipe.ingredients.map((el: { count: number; unit: any; ingredient: any; }) => createIngredient(el)).join('')}
             </ul>
 
             <button class="btn-small recipe__btn recipe__btn--add">
@@ -113,13 +113,13 @@ export const renderRecipe = (recipe, isLiked) => {
     elements.recipe.insertAdjacentHTML('afterbegin', markup);
 };
 
-export const updateServingsIngredients = recipe => {
+export const updateServingsIngredients = (recipe: import("../models/Recipe").default) => {
     // Update servings
     document.querySelector('.recipe__info-data--people').textContent = recipe.servings;
 
     // Update ingredeints
     const countElements = Array.from(document.querySelectorAll('.recipe__count'));
-    countElements.forEach((el, i) => {
+    countElements.forEach((el: any, i) => {
         el.textContent = formatCount(recipe.ingredients[i].count);
     });
 };

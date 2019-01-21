@@ -1,9 +1,10 @@
 export default class Likes {
+    likes: any[];
     constructor() {
         this.likes = [];
     }
 
-    addLike(id, title, author, img) {
+    addLike(id: any, title: any, author: any, img: any) {
         const like = { id, title, author, img };
         this.likes.push(like);
 
@@ -13,7 +14,7 @@ export default class Likes {
         return like;
     }
 
-    deleteLike(id) {
+    deleteLike(id: any) {
         const index = this.likes.findIndex(el => el.id === id);
         this.likes.splice(index, 1);
 
@@ -21,7 +22,7 @@ export default class Likes {
         this.persistData();
     }
 
-    isLiked(id) {
+    isLiked(id: string) {
         return this.likes.findIndex(el => el.id === id) !== -1;
     }
 

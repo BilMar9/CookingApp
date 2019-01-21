@@ -1,17 +1,17 @@
 import { elements } from './base';
 import { limitRecipeTitle } from './searchView';
 
-export const toggleLikeBtn = isLiked => {
+export const toggleLikeBtn = (isLiked: boolean) => {
     const iconString = isLiked ? 'icon-heart' : 'icon-heart-outlined';
     document.querySelector('.recipe__love use').setAttribute('href', `img/icons.svg#${iconString}`);
     // icons.svg#icon-heart-outlined
 };
 
-export const toggleLikeMenu = numLikes => {
+export const toggleLikeMenu = (numLikes: number) => {
     elements.likesMenu.style.visibility = numLikes > 0 ? 'visible' : 'hidden';
 };
 
-export const renderLike = like => {
+export const renderLike = (like: { id:any; title: any; author: any; img: any; }) => {
     const markup = `
         <li>
             <a class="likes__link" href="#${like.id}">
@@ -28,7 +28,7 @@ export const renderLike = like => {
     elements.likesList.insertAdjacentHTML('beforeend', markup);
 };
 
-export const deleteLike = id => {
+export const deleteLike = (id: any) => {
     const el = document.querySelector(`.likes__link[href*="${id}"]`).parentElement;
     if (el) el.parentElement.removeChild(el);
 }

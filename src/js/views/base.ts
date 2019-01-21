@@ -14,7 +14,7 @@ export const elementStrings = {
     loader: 'loader'
 };
 
-export const renderLoader = parent => {
+export const renderLoader = (parent: any) => {
     const loader = `
         <div class="${elementStrings.loader}">
             <svg>

@@ -2,7 +2,8 @@ import axios from 'axios';
 import { key, proxy } from '../config';
 
 export default class Recipe {
-    constructor(id) {
+    [x: string]: any;
+    constructor(id: string) {
         this.id = id;
     }
 
@@ -36,7 +37,7 @@ export default class Recipe {
         const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
         const units = [...unitsShort, 'kg', 'g'];
 
-        const newIngredients = this.ingredients.map(el => {
+        const newIngredients = this.ingredients.map((el: { toLowerCase: () => void; }) => {
             // 1) Uniform units
             let ingredient = el.toLowerCase();
             unitsLong.forEach((unit, i) => {
@@ -48,7 +49,7 @@ export default class Recipe {
 
             // 3) Parse ingredients into count, unit and ingredient
             const arrIng = ingredient.split(' ');
-            const unitIndex = arrIng.findIndex(el2 => units.includes(el2));
+            const unitIndex = arrIng.findIndex((el2: any) => units.includes(el2));
 
             let objIng;
             if (unitIndex > -1) {
@@ -91,12 +92,12 @@ export default class Recipe {
         this.ingredients = newIngredients;
     }
 
-    updateServings (type) {
+    updateServings (type: string) {
         // Servings
         const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
 
         // Ingredients
-        this.ingredients.forEach(ing => {
+        this.ingredients.forEach((ing: { count: number} ) => {
             ing.count *= (newServings / this.servings);
         });
 
