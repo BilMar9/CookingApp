@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: ['babel-polyfill', './src/js/index.js'],
+    entry: ['./src/js/index.ts'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/bundle.js'
@@ -41,12 +41,20 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /.\js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
+            test: /\.tsx?$/,
+            use: 'ts-loader',
+            exclude: /node_modules/
             }
         ]
-    }
+    },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ]
+    },
 };
+
+// module.exports = {
+//   output: {
+//     filename: 'bundle.js',
+//     path: path.resolve(__dirname, 'dist')
+//   }
+// };
