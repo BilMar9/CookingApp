@@ -23,12 +23,14 @@ In this lesson, we will try to make the current application a bit more readable 
 - [ ] *introduce TypeScript into the Forkify project*
 - [ ] *turn all .js files into .ts files and make the project correctly compile bundled js just like in previous lesson*
 - [ ] *run compiled TypeScript application and make sure everything runs*
-## Lesson 3: Refactoring with TypeScript
-I think we can do much better in terms of readability and quality of our code. TypeScript will help us do so immensly.
-- [ ] *install NPM package Unused*
-- [ ] *use `Unused` to identify all dead code and remove it*
-- [ ] *find all unused exports and remove them*
-- [ ] *create a class called Search and move all "search" related functionality into this class*
+## Lesson 3: The new UI
+In branch `example/newUi` you'll find two new components:
+* interface *Widget*, which simply forces the class which implements it to have an element() method which creates content injectible into DOM: HTMLElement
+* helper function *element()*, which takes string as input and outputs - again - HTMLElement
+Both of these two will form the core building blocks of our new UI.
+- [ ] *see example/newUi*
+- [ ] *understand the concept of Widget and element()*
+- [ ] *split the current Ui into independent building blocks, such as Header, Footer, LeftPanel, MiddlePanel, RightPanel or similar*
+- [ ] *for each of the above mentioned - turn them into new Ui => make them implement Widget and make them look the same as the original UI*
+- [ ] *for each of the above mentioned - when done, create a PR into master*
 > Note: currently Forkify code consists of only exported functions and the whole code is not properly encapsulated and hard to read
-## Lesson 4: Introduce a controller
-Let's introduce a central controller to handle communication between classes, e.g. Search from previous example.
