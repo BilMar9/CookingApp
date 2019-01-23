@@ -33,4 +33,3 @@ Both of these two will form the core building blocks of our new UI.
 - [ ] *split the current Ui into independent building blocks, such as Header, Footer, LeftPanel, MiddlePanel, RightPanel or similar*
 - [ ] *for each of the above mentioned - turn them into new Ui => make them implement Widget and make them look the same as the original UI*
 - [ ] *for each of the above mentioned - when done, create a PR into master*
-> Note: currently Forkify code consists of only exported functions and the whole code is not properly encapsulated and hard to read
