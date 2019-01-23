@@ -70,7 +70,7 @@ const controlSearch = async () => {
 
 const container = document.querySelector('.container');
 const header = new Header();
-container.append(header.element());
+container.prepend(header.element());
 
 (elements.searchResPages as HTMLDivElement).addEventListener('click', e => {
     const btn = (e.target as Element).closest('.btn-inline') as HTMLButtonElement;
