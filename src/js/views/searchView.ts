@@ -1,5 +1,9 @@
 import { elements } from './base';
 
+export class SearchView {
+    
+}
+
 export const getInput = () => elements.searchInput.value;
 
 export const clearInput = () => {
@@ -11,7 +15,7 @@ export const clearResults = () => {
     elements.searchResPages.innerHTML = '';
 };
 
-export const highlightSelected = (id: string) => {
+export const highlightSelected = (id: any) => {
     const resultsArr = Array.from(document.querySelectorAll('.results__link'));
     resultsArr.forEach(el => {
         el.classList.remove('results__link--active');
@@ -27,7 +31,7 @@ acc: 9 / acc + cur.length = 15 / newTitle = ['Pasta', 'with', 'tomato']
 acc: 15 / acc + cur.length = 18 / newTitle = ['Pasta', 'with', 'tomato']
 acc: 18 / acc + cur.length = 24 / newTitle = ['Pasta', 'with', 'tomato']
 */
-export const limitRecipeTitle = (title: { length: number; split: (arg0: string) => { reduce: (arg0: (acc: any, cur: any) => any, arg1: number) => void; }; }, limit = 17) => {
+export const limitRecipeTitle = (title: string, limit = 17) => {
     const newTitle: any[] = [];
     if (title.length > limit) {
         title.split(' ').reduce((acc, cur) => {
@@ -43,7 +47,7 @@ export const limitRecipeTitle = (title: { length: number; split: (arg0: string) 
     return title;
 }
 
-const renderRecipe = (recipe: { recipe_id: any; image_url: any; title: { length: number; split: (arg0: string) => { reduce: (arg0: (acc: any, cur: any) => any, arg1: number) => void; }; }; publisher: any; })=> {
+const renderRecipe = (recipe: any) => {
     const markup = `
         <li>
             <a class="results__link" href="#${recipe.recipe_id}">
@@ -91,7 +95,7 @@ const renderButtons = (page: number, numResults: number, resPerPage: number) => 
     elements.searchResPages.insertAdjacentHTML('afterbegin', button);
 };
 
-export const renderResults = (recipes: { slice: (arg0: number, arg1: number) => { forEach: (arg0: (recipe: { recipe_id: any; image_url: any; title: { length: number; split: (arg0: string) => { reduce: (arg0: (acc: any, cur: any) => any, arg1: number) => void; }; }; publisher: any; }) => void) => void; }; length: number; }, page = 1, resPerPage = 10) => {
+export const renderResults = (recipes: any, page = 1, resPerPage = 10) => {
     // render results of currente page
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;

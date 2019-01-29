@@ -8,6 +8,9 @@ import * as listView from './views/listView';
 import * as likesView from './views/likesView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
+import { SearchForm } from "./views/components/searchForm";
+import { Header } from "./views/components/header";
+
 /** Global state of the app
  * - Search object
  * - Current recipe object
@@ -15,13 +18,19 @@ import { elements, renderLoader, clearLoader } from './views/base';
  * - Liked recipes
  */
 
-var state: {
+interface App {
     search: Search;
     recipe: Recipe;
     likes: Likes;
-    list: List
+    list: List;
 }
-interface state {};
+
+const state: App = {
+    search: new Search(undefined),
+    recipe: new Recipe(undefined),
+    likes: new Likes(),
+    list: new List(),
+};
 
 /** 
  * SEARCH CONTROLLER
@@ -32,6 +41,7 @@ const controlSearch = async () => {
 
     if (query) {
         // 2) New search object and add to state
+        console.log(`searched for: ${query}`);
         state.search = new Search(query);
 
         // 3) Prepare UI for results
@@ -53,14 +63,17 @@ const controlSearch = async () => {
     }
 }
 
-elements.searchForm.addEventListener('submit', e => {
-    e.preventDefault();
-    controlSearch();
-});
+// elements.searchForm.addEventListener('submit', e => {
+//     e.preventDefault();
+//     controlSearch();
+// });
 
+const container = document.querySelector('.container');
+const header = new Header();
+container.prepend(header.element());
 
-elements.searchResPages.addEventListener('click', (e: any) => {
-    const btn = e.target.closest('.btn-inline');
+(elements.searchResPages as HTMLDivElement).addEventListener('click', e => {
+    const btn = (e.target as Element).closest('.btn-inline') as HTMLButtonElement;
     if (btn) {
         const goToPage = parseInt(btn.dataset.goto, 10);
         searchView.clearResults();
@@ -129,7 +142,7 @@ const controlList = () => {
 
 // Handle delete and update list item events
 elements.shopping.addEventListener('click', (e: any) => {
-    const id = e.target.closest('.shopping__item').dataset.itemid;
+    const id = ( (e.target as HTMLElement).closest('.shopping__item') as any ).dataset.itemid;
 
     // Handle the delete button
     if (e.target.matches('.shopping__delete, .shopping__delete *')) {
@@ -199,21 +212,21 @@ window.addEventListener('load', () => {
 
 
 // Handling recipe button clicks
-elements.recipe.addEventListener('click', (e: any) => {
-    if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+elements.recipe.addEventListener('click', e => {
+    if ((e.target as any).matches('.btn-decrease, .btn-decrease *')) {
         // Decrease button is clicked
         if (state.recipe.servings > 1) {
             state.recipe.updateServings('dec');
             recipeView.updateServingsIngredients(state.recipe);
         }
-    } else if (e.target.matches('.btn-increase, .btn-increase *')) {
+    } else if ((e.target as any).matches('.btn-increase, .btn-increase *')) {
         // Increase button is clicked
         state.recipe.updateServings('inc');
         recipeView.updateServingsIngredients(state.recipe);
-    } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
+    } else if ((e.target as any).matches('.recipe__btn--add, .recipe__btn--add *')) {
         // Add ingredients to shopping list
         controlList();
-    } else if (e.target.matches('.recipe__love, .recipe__love *')) {
+    } else if ((e.target as any).matches('.recipe__love, .recipe__love *')) {
         // Like controller
         controlLike();
     }
