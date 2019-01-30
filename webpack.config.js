@@ -11,7 +11,6 @@ module.exports = {
     devServer: {
         contentBase: './dist'
     },
-    externals: ['axios'],
     plugins: [
         new HtmlWebpackPlugin({
             filename: 'index.html',
