@@ -7,6 +7,7 @@ const container = document.querySelector('.container');
 const header = new Header();
 container.prepend(header.element());
 
+
 const results = new Results();
 container.prepend(results.element());
 
