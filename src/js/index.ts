@@ -1,5 +1,6 @@
 import { Header } from "./views/components/header";
 import { Results } from "./views/components/results";
+import { Recipes } from "./views/components/recipe";
 
 console.log("WORKS");
 
@@ -7,6 +8,8 @@ const container = document.querySelector('.container');
 const header = new Header();
 container.prepend(header.element());
 
+const recipe = new Recipes();
+container.prepend(recipe.element());
 
 const results = new Results();
 container.prepend(results.element());

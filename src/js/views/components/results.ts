@@ -7,8 +7,8 @@ export class Results implements Widget {
     element(): HTMLElement {
         if (!this.el) {
             this.el = element(`
+            <div class="results">
                 <ul class="results__list">
-                    <!--
                     <li>
                         <a class="results__link results__link--active" href="#23456">
                             <figure class="results__fig">
@@ -127,7 +127,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-                    -->
                 </ul>
             `);
         } 
