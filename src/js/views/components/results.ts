@@ -7,8 +7,8 @@ export class Results implements Widget {
     element(): HTMLElement {
         if (!this.el) {
             this.el = element(`
+            <div class="results">
                 <ul class="results__list">
-                    <!--
                     <li>
                         <a class="results__link results__link--active" href="#23456">
                             <figure class="results__fig">
@@ -20,7 +20,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#76767">
                             <figure class="results__fig">
@@ -32,7 +31,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#85354">
                             <figure class="results__fig">
@@ -44,7 +42,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#43563">
                             <figure class="results__fig">
@@ -56,7 +53,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#2256665">
                             <figure class="results__fig">
@@ -68,7 +64,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#7567567">
                             <figure class="results__fig">
@@ -80,7 +75,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#5676577">
                             <figure class="results__fig">
@@ -92,7 +86,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#98798">
                             <figure class="results__fig">
@@ -115,7 +108,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-
                     <li>
                         <a class="results__link" href="#345345435">
                             <figure class="results__fig">
@@ -127,27 +119,9 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-                    -->
                 </ul>
             `);
         } 
         return this.el;
     }
 }
-
-// <div class="results__pages">
-// <!--
-// <button class="btn-inline results__btn--prev">
-//     <svg class="search__icon">
-//         <use href="img/icons.svg#icon-triangle-left"></use>
-//     </svg>
-//     <span>Page 1</span>
-// </button>
-// <button class="btn-inline results__btn--next">
-//     <span>Page 3</span>
-//     <svg class="search__icon">
-//         <use href="img/icons.svg#icon-triangle-right"></use>
-//     </svg>
-// </button>
-// -->
-// </div>
