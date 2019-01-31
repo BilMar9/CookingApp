@@ -1,6 +1,7 @@
 import { Header } from "./views/components/header";
 import { Results } from "./views/components/results";
 import { Recipes } from "./views/components/recipe";
+import { Shopping } from "./views/components/shoppingList";
 
 console.log("WORKS");
 
@@ -11,6 +12,7 @@ container.prepend(header.element());
 const recipe = new Recipes();
 container.prepend(recipe.element());
 
+const shopping = new Shopping();
 const results = new Results();
 
 header.sigSearch.connect(query => {
@@ -35,6 +37,7 @@ header.sigLike.connect(() => {
 });
 
 container.prepend(results.element());
+container.append(shopping.element());
 
 // import Search from './models/Search';
 // import Recipe from './models/Recipe';

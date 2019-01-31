@@ -29,7 +29,6 @@ export class Results implements Widget {
         results.forEach(r => {
             this.el.appendChild(
                 element(`
-                <ul class="results__list">
                     <li>
                         <a class="results__link results__link--active" href="#${r.id}">
                             <figure class="results__fig">
@@ -41,7 +40,6 @@ export class Results implements Widget {
                             </div>
                         </a>
                     </li>
-                </ul>
                 `)
             );
         });
