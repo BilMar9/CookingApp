@@ -14,28 +14,6 @@ container.prepend(recipe.element());
 
 const shopping = new Shopping();
 const results = new Results();
-
-header.sigSearch.connect(query => {
-
-    results.setResults([
-        {
-            id: 1,
-            img: "img/test-1.jpg",
-            name: "Pizza Calzone",
-            author: "Palko Mrkvicka"
-        },
-        {
-            id: 1,
-            img: "img/test-2.jpg",
-            name: "Pizza Napoli",
-            author: "Bilo Tenista"
-        }
-    ]);
-});
-header.sigLike.connect(() => {
-    console.log('header like clicked');
-});
-
 container.prepend(results.element());
 container.append(shopping.element());
 

@@ -1,14 +1,5 @@
 import { Widget, element } from "./widget";
 
-interface Result {
-    
-    id: number;
-    img: string;
-    name: string;
-    author: string
-
-}
-
 export class Results implements Widget {
 
     private el: HTMLElement;
@@ -29,19 +20,9 @@ export class Results implements Widget {
         results.forEach(r => {
             this.el.appendChild(
                 element(`
-                    <li>
-                        <a class="results__link results__link--active" href="#${r.id}">
-                            <figure class="results__fig">
-                                <img src="${r.img}" alt="Test">
-                            </figure>
-                            <div class="results__data">
-                                <h4 class="results__name">${r.name}</h4>
-                                <p class="results__author">${r.author}</p>
-                            </div>
-                        </a>
-                    </li>
-                `)
-            );
-        });
+                <ul class="results__list"></ul>
+            `);
+        } 
+        return this.el;
     }
 }
