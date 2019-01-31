@@ -1,10 +1,12 @@
 import { Widget, element } from "./widget";
+import { Signal } from "../../util/signal";
 
 export class SearchForm implements Widget {
 
     private el: HTMLElement;
     private button: HTMLElement;
     private input: HTMLElement;
+    sigSearch = new Signal<string>();
 
     element(): HTMLElement {
         if (!this.el) {
@@ -19,7 +21,9 @@ export class SearchForm implements Widget {
             this.input = element(`<input type="text" class="search__field" placeholder="Search over 1,000,000 recipes...">`);
             this.button.addEventListener("click", (event) => {
                 event.preventDefault();
-                console.log('Form submitted');
+                const input = this.input as HTMLInputElement;
+                this.sigSearch.emit(input.value);
+                input.value = "";
             });
 
             this.el = element(`
