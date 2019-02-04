@@ -1,21 +1,11 @@
-import { Header } from "./views/components/header";
-import { Results } from "./views/components/results";
-import { Recipes } from "./views/components/recipe";
-import { Shopping } from "./views/components/shoppingList";
+import { Ui } from "./views/components/ui"
 
 console.log("WORKS");
 
 const container = document.querySelector('.container');
-const header = new Header();
-container.prepend(header.element());
 
-const recipe = new Recipes();
-container.prepend(recipe.element());
-
-const shopping = new Shopping();
-const results = new Results();
-container.prepend(results.element());
-container.append(shopping.element());
+const ui = new Ui();
+container.prepend(ui.element());
 
 // import Search from './models/Search';
 // import Recipe from './models/Recipe';
