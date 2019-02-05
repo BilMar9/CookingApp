@@ -1,6 +1,7 @@
 import { Result } from "./results";
 import axios from 'axios';
 import { key, proxy } from '../../config';
+import { SelectRecipe } from "./recipe";
 
 
 export class App {
@@ -14,6 +15,7 @@ export class App {
             if (!this.testModeOn) {
                 axios(`${proxy}http://food2fork.com/api/search?key=${key}&q=${query}`).then(result => {
                     resolve(result.data.recipes);
+
                 });
             } else {
                 const exampleResults: Result[] = [
@@ -40,4 +42,23 @@ export class App {
             }
         });
     }
+    selected(query: string): Promise<SelectRecipe[]> {
+        return new Promise((resolve, reject) => {
+            if (!this.testModeOn) {
+                
+            }
+            else {
+                const exampleRecept: SelectRecipe[] = [
+
+                    {
+                    recipe__img: "img/test-2.jpg",
+                    recipe__title: "pasta"
+                    }
+                ];
+                resolve(exampleRecept);
+            }
+                
+        });
+    }
+
 }

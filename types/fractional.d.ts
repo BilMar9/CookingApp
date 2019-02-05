@@ -1,7 +1,7 @@
 export class Fraction {
     static gcf(a: any, b: any): any;
     static primeFactors(n: any): any;
-    constructor(numerator: any, denominator: any);
+    constructor(numerator: any);
     numerator: any;
     denominator: any;
     add(b: any): any;

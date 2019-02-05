@@ -32,18 +32,18 @@ export class Shopping implements Widget {
         results.forEach(r => {
             this.el.appendChild(
                 element(`
-                <li class="shopping__item">
-                    <div class="shopping__count">
-                        <input type="number" value="${r.value}" step="${r.step}">
-                        <p>g</p>
-                    </div>
-                    <p class="shopping__description">${r.description}</p>
-                    <button class="shopping__delete btn-tiny">
-                        <svg>
-                            <use href="img/icons.svg#icon-circle-with-cross"></use>
-                        </svg>
-                    </button>
-                </li>
+                    <li class="shopping__item">
+                        <div class="shopping__count">
+                            <input type="number" value="${r.value}" step="${r.step}">
+                            <p>g</p>
+                        </div>
+                        <p class="shopping__description">${r.description}</p>
+                        <button class="shopping__delete btn-tiny">
+                            <svg>
+                                <use href="img/icons.svg#icon-circle-with-cross"></use>
+                            </svg>
+                        </button>
+                    </li>
                 `)
             )
         });

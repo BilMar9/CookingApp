@@ -11,6 +11,7 @@ export interface Result {
 export class Results implements Widget {
 
     private el: HTMLElement;
+    private pages: HTMLElement;
     sigRecipeClicked = new Signal<Result>();
     
     element(): HTMLElement {

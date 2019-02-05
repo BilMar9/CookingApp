@@ -10,14 +10,18 @@ const app = new App();
 container.prepend(ui.element());
 
 ui.getHeader().sigSearch.connect(async query => {
-    console.log(query);
     const results = await app.search(query);
-    console.log(results);
+    console.log(`Found ${results.length} for "${query}"`);
     ui.getResults().setResults(results);
 });
 
-ui.getResults().sigRecipeClicked.connect(result => {
-    console.log(result.title);
+ui.getResults().sigRecipeClicked.connect(searchResult => {
+    const recipe = app.getRecipe(searchResult.recipe_id);
+    ui.getRecipes().setRecipe(recipe);
+});
+
+ui.getRecipes().sigSelectRecipeClicked.connect(select => {
+    console.log(select.recipe__title);
 });
 
 // import Search from './models/Search';
