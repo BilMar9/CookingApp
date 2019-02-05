@@ -8,7 +8,7 @@ export class LeftPanel implements Widget {
 
     element(): HTMLElement {
         if (!this.el) {
-            this.el = element(`<div class="results">`);
+            this.el = element(`<div class="results"></div>`);
             this.results = new Results();
             this.el.appendChild(this.results.element());
         }
