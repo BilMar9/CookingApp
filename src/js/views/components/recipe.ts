@@ -7,7 +7,6 @@ export class Recipes implements Widget {
     element(): HTMLElement {
         if(!this.el) {
             this.el = element(`
-            <div class="recipe">
                 <div class="recipe">
                     <figure class="recipe__fig">
                         <img src="img/test-1.jpg" alt="Tomato" class="recipe__img">
@@ -131,7 +130,6 @@ export class Recipes implements Widget {
                             </svg>
                         </a>
                     </div>
-                </div>
             `);
         }
         return this.el;

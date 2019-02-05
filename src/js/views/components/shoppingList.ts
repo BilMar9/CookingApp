@@ -20,8 +20,8 @@ export class Shopping implements Widget {
             this.copyright = element(`
                 <div class="copyright">
                     &copy; by Jonas Schmedtmann. Powered by
-                        <a href="http://food2fork.com" target="_blank" class="link">Food2Fork.com</a>.
-                </div> `);
+                        <a href="http://food2fork.com" target="_blank" class="link">Food2Fork.com</a>
+                </div>`);
             this.el.appendChild(this.copyright);
         }
         return this.el;

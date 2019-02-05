@@ -1,22 +1,22 @@
 import { Widget, element } from "./widget";
+import { Signal } from "../../util/signal";
 
-interface Result {
-    id: number;
-    img: string;
-    name: string;
-    author: string;
+export interface Result {
+    recipe_id: number;
+    image_url: string;
+    title: string;
+    publisher: string;
 }
 
 export class Results implements Widget {
 
     private el: HTMLElement;
+    sigRecipeClicked = new Signal<Result>();
     
     element(): HTMLElement {
         if (!this.el) {
             this.el = element(`
-                <ul class="results__list">
-                    
-                </ul>
+                <div class="results"></div>
             `);
         } 
         return this.el;
@@ -24,22 +24,28 @@ export class Results implements Widget {
 
     setResults(results: Result[]): void {
         this.el.innerHTML = "";
+        console.log(results.length);
         results.forEach(r => {
-            this.el.appendChild(
-                element(`
+            const recipe = 
+            element(`
+                <ul class="results__list">
                     <li>
-                        <a class="results__link results__link--active" href="#${r.id}">
+                        <a class="results__link results__link--active" href="#${r.recipe_id}">
                             <figure class="results__fig">
-                                <img src="${r.img}" alt="Test">
+                                <img src="${r.image_url}" alt="Test">
                             </figure>
                             <div class="results__data">
-                                <h4 class="results__name">${r.name}</h4>
-                                <p class="results__author">${r.author}</p>
+                                <h4 class="results__name">${r.title}</h4>
+                                <p class="results__author">${r.publisher}</p>
                             </div>
                         </a>
                     </li>
-                `)
-            );
+                </ul>
+            `);
+            recipe.addEventListener("click", () => {
+                this.sigRecipeClicked.emit(r);
+            });
+            this.el.appendChild(recipe);
         });
     }
 }

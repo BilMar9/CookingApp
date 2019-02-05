@@ -1,11 +1,24 @@
-import { Ui } from "./views/components/ui"
+import { Ui } from "./views/components/ui";
+import { App } from "./views/components/app";
 
 console.log("WORKS");
 
-const container = document.querySelector('.container');
+const container = document.querySelector('.ui');
 
 const ui = new Ui();
+const app = new App();
 container.prepend(ui.element());
+
+ui.getHeader().sigSearch.connect(async query => {
+    console.log(query);
+    const results = await app.search(query);
+    console.log(results);
+    ui.getResults().setResults(results);
+});
+
+ui.getResults().sigRecipeClicked.connect(result => {
+    console.log(result.title);
+});
 
 // import Search from './models/Search';
 // import Recipe from './models/Recipe';

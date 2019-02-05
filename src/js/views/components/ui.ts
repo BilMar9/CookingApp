@@ -7,23 +7,32 @@ import { Shopping } from "./shoppingList";
 export class Ui implements Widget {
 
     private el: HTMLElement;
+    private header: Header;
+    private results: Results;
 
     element(): HTMLElement {
         if(!this.el) {
             this.el = element(`<div class="container"></div>`);
-            const container = document.querySelector('.container');
 
-            const header = new Header();
-            const results = new Results();
+            this.header = new Header();
+            this.results = new Results();
             const recipe = new Recipes();
             const shopping = new Shopping();
 
-            container.prepend(header.element());
-            container.prepend(results.element());
-            container.prepend(shopping.element());
-            container.prepend(recipe.element());
             
+            this.el.append(this.header.element());
+            this.el.append(this.results.element());
+            this.el.append(recipe.element());
+            this.el.append(shopping.element());
         }
         return this.el;
+    }
+
+    getHeader(): Header {
+        return this.header;
+    }
+
+    getResults(): Results {
+        return this.results;
     }
 }

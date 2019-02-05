@@ -8,7 +8,7 @@ export class MiddlePanel implements Widget {
 
     element(): HTMLElement {
         if(!this.el) {
-            this.el = element(`<div class="recipe">`);
+            this.el = element(`<div class="recipe"></div>`);
             this.recipe = new Recipes();
             this.el.appendChild(this.recipe.element());
         }
