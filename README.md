@@ -33,3 +33,8 @@ Both of these two will form the core building blocks of our new UI.
 - [ ] *split the current Ui into independent building blocks, such as Header, Footer, LeftPanel, MiddlePanel, RightPanel or similar*
 - [ ] *for each of the above mentioned - turn them into new Ui => make them implement Widget and make them look the same as the original UI*
 - [ ] *for each of the above mentioned - when done, create a PR into master*
+## Lesson 4: Bind Ui and App
+We have successfully implemented the new UI based on the Widget interface building blocks. Now we need to make it working again. We will be using the so called Signal-Slot pattern.
+- [] *see signal.ts and make yourself familiar with it*
+- [] *create a class App and put all non-ui related code in there (e.g. API calls)*
+- [] *join your Ui components and App methods together via SignalSlots in index.ts*
