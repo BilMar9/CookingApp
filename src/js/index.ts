@@ -11,17 +11,17 @@ container.prepend(ui.element());
 
 ui.getHeader().sigSearch.connect(async query => {
     const results = await app.search(query);
-    console.log(`Found ${results.length} for "${query}"`);
     ui.getResults().setResults(results);
 });
 
-ui.getResults().sigRecipeClicked.connect(searchResult => {
-    const recipe = app.getRecipe(searchResult.recipe_id);
+ui.getResults().sigRecipeClicked.connect(async result => {
+    console.log(result.recipe_id);
+    const recipe = await app.getRecipe(result);
     ui.getRecipes().setRecipe(recipe);
 });
 
-ui.getRecipes().sigSelectRecipeClicked.connect(select => {
-    console.log(select.recipe__title);
+ui.getRecipes().sigAddShoppingButtonClicked.connect(recipe => {
+    ui.getShopList().addIngredient(recipe);
 });
 
 // import Search from './models/Search';

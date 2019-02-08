@@ -11,6 +11,7 @@ export class Ui implements Widget {
     private header: Header;
     private results: Results;
     private recipe: Recipes;
+    private shopping: Shopping;
 
     element(): HTMLElement {
         if(!this.el) {
@@ -19,13 +20,12 @@ export class Ui implements Widget {
             this.header = new Header();
             this.results = new Results();
             this.recipe = new Recipes();
-            const shopping = new Shopping();
+            this.shopping = new Shopping();
 
-            
             this.el.append(this.header.element());
             this.el.append(this.results.element());
             this.el.append(this.recipe.element());
-            this.el.append(shopping.element());
+            this.el.append(this.shopping.element());
         }
         return this.el;
     }
@@ -40,5 +40,9 @@ export class Ui implements Widget {
 
     getRecipes(): Recipes {
         return this.recipe;
+    }
+
+    getShopList(): Shopping {
+        return this.shopping;
     }
 }

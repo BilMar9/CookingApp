@@ -2,6 +2,7 @@ import { Widget, element } from "./widget";
 import { Signal } from "../../util/signal";
 
 export interface Result {
+
     recipe_id: number;
     image_url: string;
     title: string;
@@ -11,7 +12,6 @@ export interface Result {
 export class Results implements Widget {
 
     private el: HTMLElement;
-    private pages: HTMLElement;
     sigRecipeClicked = new Signal<Result>();
     
     element(): HTMLElement {
@@ -25,24 +25,24 @@ export class Results implements Widget {
 
     setResults(results: Result[]): void {
         this.el.innerHTML = "";
-        console.log(results.length);
+            console.log(results.length);
         results.forEach(r => {
             const recipe = 
-            element(`
-                <ul class="results__list">
-                    <li>
-                        <a class="results__link results__link--active" href="#${r.recipe_id}">
-                            <figure class="results__fig">
-                                <img src="${r.image_url}" alt="Test">
-                            </figure>
-                            <div class="results__data">
-                                <h4 class="results__name">${r.title}</h4>
-                                <p class="results__author">${r.publisher}</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            `);
+                element(`
+                    <ul class="results__list">
+                        <li>
+                            <a class="results__link results__link--active" href="#${r.recipe_id}">
+                                <figure class="results__fig">
+                                    <img src="${r.image_url}" alt="Test">
+                                </figure>
+                                <div class="results__data">
+                                    <h4 class="results__name">${r.title}</h4>
+                                    <p class="results__author">${r.publisher}</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                `);
             recipe.addEventListener("click", () => {
                 this.sigRecipeClicked.emit(r);
             });

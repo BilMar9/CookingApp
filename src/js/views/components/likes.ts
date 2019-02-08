@@ -23,7 +23,6 @@ export class Likes implements Widget {
             this.list = element(`
                 <div class="likes__panel">
                     <ul class="likes__list">
-                        <!--
                         <li>
                             <a class="likes__link" href="#23456">
                                 <figure class="likes__fig">
@@ -35,7 +34,6 @@ export class Likes implements Widget {
                                 </div>
                             </a>
                         </li>
-                        -->
                     </ul>
                 </div>
             `);
