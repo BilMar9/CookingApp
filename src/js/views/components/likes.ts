@@ -7,6 +7,7 @@ export class Likes implements Widget {
     private icon: HTMLElement;
     private list: HTMLElement
     sigLike = new Signal<void>();
+   
 
     element(): HTMLElement {
         if (!this.el) {
@@ -18,11 +19,13 @@ export class Likes implements Widget {
                 </div>`
             );
             this.icon.addEventListener("click", () => {
+                console.log("resultLove");
                 this.sigLike.emit();
             });
             this.list = element(`
                 <div class="likes__panel">
                     <ul class="likes__list">
+                        <!--
                         <li>
                             <a class="likes__link" href="#23456">
                                 <figure class="likes__fig">
@@ -34,6 +37,7 @@ export class Likes implements Widget {
                                 </div>
                             </a>
                         </li>
+                        -->
                     </ul>
                 </div>
             `);

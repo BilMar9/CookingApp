@@ -23,7 +23,6 @@ ui.getResults().sigRecipeClicked.connect(async result => {
 ui.getRecipes().sigAddShoppingButtonClicked.connect(recipe => {
     ui.getShopList().addIngredient(recipe);
 });
-
 // import Search from './models/Search';
 // import Recipe from './models/Recipe';
 // import List from './models/List';

@@ -19,6 +19,11 @@ export class Results implements Widget {
             this.el = element(`
                 <div class="results"></div>
             `);
+            const pages = element(`
+            <div class="results__pages">
+            </div>
+        `)
+        this.el.appendChild(pages);
         } 
         return this.el;
     }
@@ -26,6 +31,23 @@ export class Results implements Widget {
     setResults(results: Result[]): void {
         this.el.innerHTML = "";
             console.log(results.length);
+        const pagesBtn = element(`
+            <button class="btn-inline results__btn--prev">
+                <svg class="search__icon">
+                    <use href="img/icons.svg#icon-triangle-left"></use>
+                </svg>
+                <span>Page 1</span>
+            </button>
+            <button class="btn-inline results__btn--next">
+                <span>Page 3</span>
+                <svg class="search__icon">
+                    <use href="img/icons.svg#icon-triangle-right"></use>
+                </svg>
+            </button>
+        `);
+        pagesBtn.addEventListener("click", () => {
+            console.log("Clicked Btn Page");
+        });
         results.forEach(r => {
             const recipe = 
                 element(`
@@ -48,5 +70,6 @@ export class Results implements Widget {
             });
             this.el.appendChild(recipe);
         });
+        this.el.appendChild(pagesBtn);
     }
 }

@@ -20,7 +20,9 @@ export interface Recipe {
     image_url: string;
     social_rank: number;
     publisher_url: string;
-    ingredients: IngredientItem[]
+    ingredients: IngredientItem[];
+    minutes: number;
+    people: number
 
 }
 
@@ -100,7 +102,9 @@ export class App {
                     image_url: "http://static.food2fork.com/fruitpizza9a19.jpg",
                     social_rank: 100,
                     publisher_url: "http://thepioneerwoman.com",
-                    ingredients: parsedIngredients
+                    ingredients: parsedIngredients,
+                    minutes: 50,
+                    people:8
                 
                 };
                 resolve(exampleRecipe);

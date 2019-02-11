@@ -6,7 +6,8 @@ export class Recipes implements Widget {
 
     private el: HTMLElement;
     sigAddShoppingButtonClicked = new Signal<Recipe>();
-
+    sigAddLoveBtnClicked = new Signal<Recipes>();
+    
     element(): HTMLElement {
         if(!this.el) {
             this.el = element(`
@@ -18,6 +19,7 @@ export class Recipes implements Widget {
     
     setRecipe(r: Recipe): void {
         this.el.innerHTML = "";
+        
         const recipeHtml = element(`
             <figure class="recipe__fig">
                 <img src="${r.image_url}" alt="Tomato" class="recipe__img">
@@ -27,41 +29,60 @@ export class Recipes implements Widget {
             </figure>
             
         `);
+        const addLoveBtn = element(`
+            <button class="recipe__love">
+                <svg class="header__likes">
+                    <use href="img/icons.svg#icon-heart-outlined"></use>
+                </svg>
+            </button>
+        `);
+       addLoveBtn.addEventListener("click", () => {
+            console.log("Love Button");
+            this.sigAddLoveBtnClicked.emit();
+        });
+        const plusBtn = element(`
+            <button class="btn-tiny">
+                <svg>
+                    <use href="img/icons.svg#icon-circle-with-plus"></use>
+                </svg>
+            </button>
+            
+        `);
+        plusBtn.addEventListener("click", () => {
+            console.log("Plus Button");
+        });
+        const minusBtn = element(`
+            <button class="btn-tiny">
+                <svg>
+                    <use href="img/icons.svg#icon-circle-with-minus"></use>
+                </svg>
+            </button>
+        `);
+        minusBtn.addEventListener("click", () => {
+            console.log("Minus Button");
+        });
         const recipeDetails = element(`
             <div class="recipe__details">
                 <div class="recipe__info">
                     <svg class="recipe__info-icon">
                         <use href="img/icons.svg#icon-stopwatch"></use>
                     </svg>
-                    <span class="recipe__info-data recipe__info-data--minutes">45</span>
+                    <span class="recipe__info-data recipe__info-data--minutes">${r.minutes}</span>
                     <span class="recipe__info-text"> minutes</span>
                 </div>
                 <div class="recipe__info">
                     <svg class="recipe__info-icon">
                         <use href="img/icons.svg#icon-man"></use>
                     </svg>
-                    <span class="recipe__info-data recipe__info-data--people">4</span>
+                    <span class="recipe__info-data recipe__info-data--people">${r.people}</span>
                     <span class="recipe__info-text"> servings</span>
-                    <div class="recipe__info-buttons">
-                        <button class="btn-tiny">
-                            <svg>
-                                <use href="img/icons.svg#icon-circle-with-minus"></use>
-                            </svg>
-                        </button>
-                        <button class="btn-tiny">
-                            <svg>
-                                <use href="img/icons.svg#icon-circle-with-plus"></use>
-                            </svg>
-                        </button>
-                    </div>
+                    <div class="recipe__info-buttons"></div>
                 </div>
-                <button class="recipe__love">
-                    <svg class="header__likes">
-                        <use href="img/icons.svg#icon-heart-outlined"></use>
-                    </svg>
-                </button>
             </div>
         `);
+        this.el.appendChild(recipeDetails).appendChild(plusBtn);
+        this.el.appendChild(recipeDetails).appendChild(minusBtn);
+        this.el.appendChild(recipeDetails).appendChild(addLoveBtn);
         
         const recipeIngredients = r.ingredients.map(i => {
             return element (`
