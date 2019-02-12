@@ -25,8 +25,9 @@ export class Shopping implements Widget {
         }
         return this.el;
     }
+    
+    addRecipe(recipe: Recipe): void {
 
-    addIngredient(recipe: Recipe): void {
         recipe.ingredients.forEach(i => {
             if(this.ingredients.get(i.name)){
                 const previousValue = this.ingredients.get(i.name);
@@ -79,7 +80,6 @@ export class Shopping implements Widget {
         this.el.appendChild(this.header);
         this.el.appendChild(this.shoppingList);
         this.shoppingList.appendChild(shoppingItem).appendChild(deleteBtn);
-        
            
             // document.querySelector(".shopping__count").append(input);
             // input.addEventListener("change", () => {

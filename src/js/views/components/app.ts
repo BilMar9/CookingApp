@@ -21,8 +21,8 @@ export interface Recipe {
     social_rank: number;
     publisher_url: string;
     ingredients: IngredientItem[];
-    minutes: number;
-    people: number
+    calcTime: number;
+    calcServings: number
 
 }
 
@@ -64,7 +64,6 @@ export class App {
             }
         });
     }
-    
     getRecipe(result: Result): Promise<Recipe> {
         return new Promise((resolve, reject) => {
             if(!this.testModeOn) {
@@ -86,6 +85,7 @@ export class App {
                         count: Number(splitted.shift()),
                         unit: splitted.shift(),
                         name: splitted.join(" "),
+                        
                     }
                     return parsed;
                 });
@@ -103,12 +103,13 @@ export class App {
                     social_rank: 100,
                     publisher_url: "http://thepioneerwoman.com",
                     ingredients: parsedIngredients,
-                    minutes: 50,
-                    people:8
+                    calcTime: 45,
+                    calcServings: 4
                 
                 };
                 resolve(exampleRecipe);
             }
         });
+        
     }
 }

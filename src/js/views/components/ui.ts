@@ -1,7 +1,7 @@
 import { Widget, element } from "./widget";
 import { Header } from "./header";
 import { Results } from "./results";
-import { Recipes } from "./recipe";
+import { Recipes } from "./middlePanel";
 import { Shopping } from "./shoppingList";
 
 

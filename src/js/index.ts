@@ -18,10 +18,11 @@ ui.getResults().sigRecipeClicked.connect(async result => {
     console.log(result.recipe_id);
     const recipe = await app.getRecipe(result);
     ui.getRecipes().setRecipe(recipe);
+    ui.getRecipes().updateHtml();
 });
 
 ui.getRecipes().sigAddShoppingButtonClicked.connect(recipe => {
-    ui.getShopList().addIngredient(recipe);
+    ui.getShopList().addRecipe(recipe);
 });
 // import Search from './models/Search';
 // import Recipe from './models/Recipe';
