@@ -6,8 +6,9 @@ export class Recipes implements Widget {
 
     private el: HTMLElement;
     private recipe: Recipe;
+    time: number;
     sigAddShoppingButtonClicked = new Signal<Recipe>();
-    sigAddLoveBtnClicked = new Signal<Recipes>();
+    sigHeartClicked = new Signal<Recipe>();
 
     element(): HTMLElement {
         if(!this.el) {
@@ -20,6 +21,7 @@ export class Recipes implements Widget {
     
     setRecipe(r: Recipe): void {
         this.recipe = r;
+        this.updateTime();
     };
 
     updateServingsPlus () {
@@ -40,10 +42,14 @@ export class Recipes implements Widget {
         });
         this.recipe.calcServings = newServings;
     }
-
+    updateTime() {
+        const numIng = this.recipe.ingredients.length;
+        const periods = Math.ceil(numIng / 3);
+        this.time = periods * 15;
+    }
     updateHtml() {
         this.el.innerHTML = "";
-        
+
         const recipeHtml = element(`
             <figure class="recipe__fig">
                 <img src="${this.recipe.image_url}" alt="Tomato" class="recipe__img">
@@ -52,16 +58,16 @@ export class Recipes implements Widget {
                 </h1>
             </figure>
         `);
-        const addLoveBtn = element(`
+        const heart = element(`
             <button class="recipe__love">
                 <svg class="header__likes">
                     <use href="img/icons.svg#icon-heart-outlined"></use>
                 </svg>
             </button>
         `);
-       addLoveBtn.addEventListener("click", () => {
-            console.log("Love Button");
-            this.sigAddLoveBtnClicked.emit();
+       heart.addEventListener("click", () => {
+            this.sigHeartClicked.emit(this.recipe);
+            console.log(this.recipe);
         });
 
         const plusBtn = element(`
@@ -94,7 +100,7 @@ export class Recipes implements Widget {
                     <svg class="recipe__info-icon">
                         <use href="img/icons.svg#icon-stopwatch"></use>
                     </svg>
-                    <span class="recipe__info-data recipe__info-data--minutes">${this.recipe.calcTime}</span>
+                    <span class="recipe__info-data recipe__info-data--minutes">${this.time}</span>
                     <span class="recipe__info-text"> minutes</span>
                 </div>
                 <div class="recipe__info">
@@ -109,7 +115,7 @@ export class Recipes implements Widget {
         `);
         this.el.appendChild(recipeDetails).appendChild(plusBtn);
         this.el.appendChild(recipeDetails).appendChild(minusBtn);
-        this.el.appendChild(recipeDetails).appendChild(addLoveBtn);
+        this.el.appendChild(recipeDetails).appendChild(heart);
         
         const recipeIngredients = this.recipe.ingredients.map(i => {
             return element (`

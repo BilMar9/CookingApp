@@ -1,6 +1,7 @@
 import { Widget, element } from "./widget";
 import { Recipe, IngredientItem } from "./app";
 
+
 export class Shopping implements Widget {
 
     private el: HTMLElement;
@@ -8,6 +9,18 @@ export class Shopping implements Widget {
     private header: HTMLElement;
     private shoppingList: HTMLElement;
     private ingredients = new Map<string, IngredientItem>();
+    private shortener = new Map<string, string>([
+        ['tablespoons', 'tbsp'],
+        ['tablespoon', 'tbsp'],
+        ['ounces', 'oz'],
+        ['ounce', 'oz'],
+        ['teaspoons', 'tsp'],
+        ['teaspoon', 'tsp'],
+        ['pounds', 'pound'],
+        ['kilograms', 'kg'],
+        ['grams', 'g'],
+        ['cups', 'cup'],
+    ]);
     
     element(): HTMLElement {
         if(!this.el) {
@@ -17,17 +30,12 @@ export class Shopping implements Widget {
                     <ul class="shopping__list"></ul>
                 </div>
             `);
-            // const heading2 =
-            //     element(`
-            //         <h2 class="heading-2">My Shopping List</h2>
-            // `);
-            // this.el.appendChild(heading2);
         }
         return this.el;
     }
-    
-    addRecipe(recipe: Recipe): void {
 
+      
+    addRecipe(recipe: Recipe): void {
         recipe.ingredients.forEach(i => {
             if(this.ingredients.get(i.name)){
                 const previousValue = this.ingredients.get(i.name);
@@ -40,9 +48,9 @@ export class Shopping implements Widget {
             }
             else {
                 this.ingredients.set(i.name, i);
+
             }
         });
-
         this.update();
     };
 
@@ -52,11 +60,8 @@ export class Shopping implements Widget {
         this.header = element(`<h2 class="heading-2">My Shopping List</h2>`);
         this.shoppingList = element(`<ul class="shopping__list"></ul>`);
         
-        this.ingredients.forEach(ingredient => {
-            // const input = 
-            //     element(`
-            //         <input type="number" value="${ingredient.count}" step="10">
-            //     `);
+        this.ingredients.forEach(ingredient => {  
+
             const deleteBtn = element(`
                 <button class="shopping__delete btn-tiny">
                     <svg>
@@ -72,7 +77,7 @@ export class Shopping implements Widget {
                     <li class="shopping__item">
                         <div class="shopping__count">
                             <input type="text" value="${ingredient.count}" step="1">
-                            <p>${ingredient.unit}</p>
+                            <p>${this.shortener.get(ingredient.unit) ? this.shortener.get(ingredient.unit) : ""}</p>
                         </div>
                         <p class="shopping__description">${ingredient.name}</p>
                     </li>

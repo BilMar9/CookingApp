@@ -1,7 +1,5 @@
 import { Ui } from "./views/components/ui";
 import { App } from "./views/components/app";
-import { Recipes } from "./views/components/middlePanel";
-import Recipe from "./models/Recipe";
 
 console.log("WORKS");
 
@@ -17,7 +15,6 @@ ui.getHeader().sigSearch.connect(async query => {
 });
 
 ui.getResults().sigRecipeClicked.connect(async result => {
-    console.log(result.recipe_id);
     const recipe = await app.getRecipe(result);
     ui.getRecipes().setRecipe(recipe);
     ui.getRecipes().updateHtml();
@@ -25,6 +22,12 @@ ui.getResults().sigRecipeClicked.connect(async result => {
 
 ui.getRecipes().sigAddShoppingButtonClicked.connect(recipe => {
     ui.getShopList().addRecipe(recipe);
+});
+
+ui.getRecipes().sigHeartClicked.connect(recipe => {
+    console.log(recipe);
+    ui.getLikes().addRecipeHeart(recipe);
+
 });
 
 // import Search from './models/Search';

@@ -3,6 +3,7 @@ import { Header } from "./header";
 import { Results } from "./results";
 import { Recipes } from "./middlePanel";
 import { Shopping } from "./shoppingList";
+import { Likes } from "./likes";
 
 
 export class Ui implements Widget {
@@ -12,6 +13,7 @@ export class Ui implements Widget {
     private results: Results;
     private recipe: Recipes;
     private shopping: Shopping;
+    private likes: Likes;
 
     element(): HTMLElement {
         if(!this.el) {
@@ -21,11 +23,13 @@ export class Ui implements Widget {
             this.results = new Results();
             this.recipe = new Recipes();
             this.shopping = new Shopping();
+            this.likes = new Likes();
 
             this.el.append(this.header.element());
             this.el.append(this.results.element());
             this.el.append(this.recipe.element());
             this.el.append(this.shopping.element());
+            this.el.append(this.likes.element());
         }
         return this.el;
     }
@@ -44,5 +48,8 @@ export class Ui implements Widget {
 
     getShopList(): Shopping {
         return this.shopping;
+    }
+    getLikes(): Likes {
+        return this.likes;
     }
 }

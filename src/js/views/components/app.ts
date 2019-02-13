@@ -73,10 +73,12 @@ export class App {
             } else {
                 const ingredients = [
                     "2 jalapeno peppers, cut in half lengthwise and seeded",
-                    "2 slices sour dough bread", 
+                    "2 grams slices sour dough bread", 
                     "1 tablespoon butter, room temperature", 
-                    "1/2 cup jack and cheddar cheese, shredded",
-                    "1 tablespoon tortilla chips, crumbled",
+                    "1/2 cups jack and cheddar cheese, shredded",
+                    "1 tablespoons tortilla chips, crumbled",
+                    // "4 cups water and cheddar cheese, shredded",
+                    // "1 pizza tortilla chips, crumbled",
                 ];
 
                 const parsePlease = ((line: string): IngredientItem => {
