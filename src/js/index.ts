@@ -25,9 +25,7 @@ ui.getRecipes().sigAddShoppingButtonClicked.connect(recipe => {
 });
 
 ui.getRecipes().sigHeartClicked.connect(recipe => {
-    console.log(recipe);
-    ui.getLikes().addRecipeHeart(recipe);
-
+    ui.getHeader().getLikes().addRecipeHeart(recipe);
 });
 
 // import Search from './models/Search';

@@ -7,11 +7,16 @@ export class Likes implements Widget {
     private el: HTMLElement;
     private icon: HTMLElement;
     private list: HTMLElement
+    private ul: HTMLElement;
     sigLike = new Signal<Recipe>();
    
 
     element(): HTMLElement {
         if (!this.el) {
+            this.el = element(`
+                <div class="likes">
+                </div>
+            `);
             this.icon = element(`
                 <div class="likes__field">
                     <svg class="likes__icon">
@@ -26,31 +31,32 @@ export class Likes implements Widget {
                 <div class="likes__panel">
                 </div>
             `);
-            this.el = element(`
-                <div class="likes">
-                </div>
+            this.ul = element(`
+                <ul class="likes__list">
+                </ul>
             `);
-            this.el.appendChild(this.icon);
-            this.el.appendChild(this.list);
+            
+           this.el.appendChild(this.icon);
+           this.el.appendChild(this.list);
+           this.list.appendChild(this.ul);
+
         }
         return this.el;
     }
     addRecipeHeart(r: Recipe): void {
-        const list = element(`
-            <ul class="likes__list">
-                <li>
-                    <a class="likes__link" href="${r.recipe_id}">
-                        <figure class="likes__fig">
-                            <img src="${r.image_url}" alt="Test">
-                        </figure>
-                        <div class="likes__data">
-                            <h4 class="likes__name">${r.title}</h4>
-                            <p class="likes__author">${r.publisher}</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+        const liked = element(`
+            <li>
+                <a class="likes__link" href="${r.recipe_id}">
+                    <figure class="likes__fig">
+                        <img src="${r.image_url}" alt="Test">
+                    </figure>
+                    <div class="likes__data">
+                        <h4 class="likes__name">${r.title}</h4>
+                        <p class="likes__author">${r.publisher}</p>
+                    </div>
+                </a>
+            </li>
         `);
-        this.el.appendChild(list);
+        this.ul.appendChild(liked);
     }
 }
