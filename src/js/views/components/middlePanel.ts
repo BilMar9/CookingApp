@@ -9,7 +9,6 @@ export class Recipes implements Widget {
     sigAddShoppingButtonClicked = new Signal<Recipe>();
     sigAddLoveBtnClicked = new Signal<Recipes>();
 
-    
     element(): HTMLElement {
         if(!this.el) {
             this.el = element(`
@@ -23,6 +22,25 @@ export class Recipes implements Widget {
         this.recipe = r;
     };
 
+    updateServingsPlus () {
+        // Servings
+        const newServings = 'dec' ? this.recipe.calcServings + 1 : this.recipe.calcServings - 1;
+        // Ingredients
+        this.recipe.ingredients.forEach((ing: { count: number} ) => {
+            ing.count *= (newServings / this.recipe.calcServings);
+        });
+        this.recipe.calcServings = newServings;
+    }
+    updateServingsMinus () {
+        // Servings
+        const newServings = 'dec' ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
+        // Ingredients
+        this.recipe.ingredients.forEach((ing: { count: number} ) => {
+            ing.count *= (newServings / this.recipe.calcServings);
+        });
+        this.recipe.calcServings = newServings;
+    }
+
     updateHtml() {
         this.el.innerHTML = "";
         
@@ -33,7 +51,6 @@ export class Recipes implements Widget {
                     <span>${this.recipe.title}</span>
                 </h1>
             </figure>
-            
         `);
         const addLoveBtn = element(`
             <button class="recipe__love">
@@ -46,6 +63,7 @@ export class Recipes implements Widget {
             console.log("Love Button");
             this.sigAddLoveBtnClicked.emit();
         });
+
         const plusBtn = element(`
             <button class="btn-tiny">
                 <svg>
@@ -55,8 +73,10 @@ export class Recipes implements Widget {
             
         `);
         plusBtn.addEventListener("click", () => {
-            console.log("Plus Button");
+            this.updateServingsPlus();
+            this.updateHtml();
         });
+
         const minusBtn = element(`
             <button class="btn-tiny">
                 <svg>
@@ -65,7 +85,8 @@ export class Recipes implements Widget {
             </button>
         `);
         minusBtn.addEventListener("click", () => {
-            console.log("Minus Button");
+            this.updateServingsMinus();
+            this.updateHtml();
         });
         const recipeDetails = element(`
             <div class="recipe__details">
@@ -150,16 +171,5 @@ export class Recipes implements Widget {
         this.el.appendChild(recipeDetails);
         this.el.appendChild(ingredientsHtml).appendChild(addShoppingBtn);
         this.el.appendChild(recipeDirections);
-    };
-
-    updateServings(type: string) {
-        const newServings = type === 'dec' ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
-
-        // Ingredients
-        this.recipe.ingredients.forEach((ing: { count: number} ) => {
-            ing.count *= (newServings / this.recipe.calcServings);
-        });
-
-        this.recipe.calcServings = newServings;
     };
 }

@@ -1,5 +1,7 @@
 import { Ui } from "./views/components/ui";
 import { App } from "./views/components/app";
+import { Recipes } from "./views/components/middlePanel";
+import Recipe from "./models/Recipe";
 
 console.log("WORKS");
 
@@ -24,6 +26,7 @@ ui.getResults().sigRecipeClicked.connect(async result => {
 ui.getRecipes().sigAddShoppingButtonClicked.connect(recipe => {
     ui.getShopList().addRecipe(recipe);
 });
+
 // import Search from './models/Search';
 // import Recipe from './models/Recipe';
 // import List from './models/List';
