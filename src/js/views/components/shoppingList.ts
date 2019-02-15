@@ -1,7 +1,6 @@
 import { Widget, element } from "./widget";
 import { Recipe, IngredientItem } from "./app";
 
-
 export class Shopping implements Widget {
 
     private el: HTMLElement;
@@ -34,7 +33,6 @@ export class Shopping implements Widget {
         return this.el;
     }
 
-      
     addRecipe(recipe: Recipe): void {
         recipe.ingredients.forEach(i => {
             if(this.ingredients.get(i.name)){
@@ -48,14 +46,12 @@ export class Shopping implements Widget {
             }
             else {
                 this.ingredients.set(i.name, i);
-
             }
         });
         this.update();
     };
 
     update(): void {
-        // prekresli cele odznova
         this.el.innerHTML = "";
         this.header = element(`<h2 class="heading-2">My Shopping List</h2>`);
         this.shoppingList = element(`<ul class="shopping__list"></ul>`);
@@ -70,7 +66,6 @@ export class Shopping implements Widget {
                 </button>
             `);
             deleteBtn.addEventListener("click", () => {
-                console.log("Delete Button");
         });
             const shoppingItem =
                 element(`
@@ -86,10 +81,6 @@ export class Shopping implements Widget {
         this.el.appendChild(this.shoppingList);
         this.shoppingList.appendChild(shoppingItem).appendChild(deleteBtn);
            
-            // document.querySelector(".shopping__count").append(input);
-            // input.addEventListener("change", () => {
-            //     console.log("changed");
-            // });
         });
         this.copyright = element(`
             <div class="copyright">

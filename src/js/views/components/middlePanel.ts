@@ -23,7 +23,6 @@ export class Recipes implements Widget {
         this.recipe = r;
         this.updateTime();
     };
-
     updateServingsPlus () {
         // Servings
         const newServings = 'dec' ? this.recipe.calcServings + 1 : this.recipe.calcServings - 1;
@@ -67,7 +66,6 @@ export class Recipes implements Widget {
         `);
        heart.addEventListener("click", () => {
             this.sigHeartClicked.emit(this.recipe);
-            console.log(this.recipe);
         });
 
         const plusBtn = element(`

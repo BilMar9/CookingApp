@@ -31,6 +31,7 @@ export class App {
     result: any;
     query: any;
     private testModeOn = true;
+    ingredients: any;
 
     search(query: string): Promise<Result[]> {
         return new Promise((resolve, reject) => {
@@ -64,6 +65,7 @@ export class App {
             }
         });
     }
+    
     getRecipe(result: Result): Promise<Recipe> {
         return new Promise((resolve, reject) => {
             if(!this.testModeOn) {
@@ -77,22 +79,17 @@ export class App {
                     "1 tablespoon butter, room temperature", 
                     "1/2 cups jack and cheddar cheese, shredded",
                     "1 tablespoons tortilla chips, crumbled",
-                    // "4 cups water and cheddar cheese, shredded",
-                    // "1 pizza tortilla chips, crumbled",
                 ];
 
-                const parsePlease = ((line: string): IngredientItem => {
-                    const splitted = line.split(" ");
+                const newIngredients = ingredients.map((i: string) => {
+                    const splitted = i.split(" ");
                     const parsed = {
-                        count: Number(splitted.shift()),
+                        count: eval(splitted.shift()),
                         unit: splitted.shift(),
                         name: splitted.join(" "),
-                        
-                    }
+                    };
                     return parsed;
                 });
-
-                const parsedIngredients = ingredients.map(parsePlease);
 
                 const exampleRecipe: Recipe = {
                     
@@ -104,7 +101,7 @@ export class App {
                     image_url: "http://static.food2fork.com/fruitpizza9a19.jpg",
                     social_rank: 100,
                     publisher_url: "http://thepioneerwoman.com",
-                    ingredients: parsedIngredients,
+                    ingredients: newIngredients,
                     calcTime: 45,
                     calcServings: 4
                 
@@ -112,6 +109,6 @@ export class App {
                 resolve(exampleRecipe);
             }
         });
-        
     }
 }
+

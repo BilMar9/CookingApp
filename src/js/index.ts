@@ -15,6 +15,7 @@ ui.getHeader().sigSearch.connect(async query => {
 });
 
 ui.getResults().sigRecipeClicked.connect(async result => {
+    await app.getRecipe(result);
     const recipe = await app.getRecipe(result);
     ui.getRecipes().setRecipe(recipe);
     ui.getRecipes().updateHtml();
