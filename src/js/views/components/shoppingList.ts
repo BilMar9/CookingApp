@@ -1,5 +1,5 @@
 import { Widget, element } from "./widget";
-import { Recipe, IngredientItem } from "./app";
+import { Recipe, IngredientItem, App } from "./app";
 
 export class Shopping implements Widget {
 
@@ -55,9 +55,22 @@ export class Shopping implements Widget {
         this.el.innerHTML = "";
         this.header = element(`<h2 class="heading-2">My Shopping List</h2>`);
         this.shoppingList = element(`<ul class="shopping__list"></ul>`);
-        
+        this.copyright = element(`
+            <div class="copyright">
+                &copy; by Jonas Schmedtmann. Powered by
+                    <a href="http://food2fork.com" target="_blank" class="link">Food2Fork.com</a>
+            </div>
+        `);
         this.ingredients.forEach(ingredient => {  
-
+            const shoppingItem = element(`
+                <li class="shopping__item">
+                    <div class="shopping__count">
+                        <input type="text" value="${ingredient.count}" step="1">
+                        <p>${this.shortener.get(ingredient.unit) ? this.shortener.get(ingredient.unit) : ""}</p>
+                    </div>
+                    <p class="shopping__description">${ingredient.name}</p>
+                </li>
+            `);
             const deleteBtn = element(`
                 <button class="shopping__delete btn-tiny">
                     <svg>
@@ -66,27 +79,13 @@ export class Shopping implements Widget {
                 </button>
             `);
             deleteBtn.addEventListener("click", () => {
+                this.shoppingList.removeChild(shoppingItem);
+            });
+            shoppingItem.appendChild(deleteBtn);
+            this.shoppingList.appendChild(shoppingItem);
         });
-            const shoppingItem =
-                element(`
-                    <li class="shopping__item">
-                        <div class="shopping__count">
-                            <input type="text" value="${ingredient.count}" step="1">
-                            <p>${this.shortener.get(ingredient.unit) ? this.shortener.get(ingredient.unit) : ""}</p>
-                        </div>
-                        <p class="shopping__description">${ingredient.name}</p>
-                    </li>
-                `);
         this.el.appendChild(this.header);
         this.el.appendChild(this.shoppingList);
-        this.shoppingList.appendChild(shoppingItem).appendChild(deleteBtn);
-           
-        });
-        this.copyright = element(`
-            <div class="copyright">
-                &copy; by Jonas Schmedtmann. Powered by
-                    <a href="http://food2fork.com" target="_blank" class="link">Food2Fork.com</a>
-            </div>`);
         this.el.appendChild(this.copyright);
     }
 }

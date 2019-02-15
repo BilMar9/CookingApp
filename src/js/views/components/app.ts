@@ -28,9 +28,9 @@ export interface Recipe {
 
 export class App {
 
+    private testModeOn = true;
     result: any;
     query: any;
-    private testModeOn = true;
     ingredients: any;
 
     search(query: string): Promise<Result[]> {
