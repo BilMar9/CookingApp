@@ -1,15 +1,22 @@
 import { Widget, element } from "./widget";
 import { Signal } from "../../util/signal";
+import { Recipe } from "./app";
 
 export class Likes implements Widget {
 
     private el: HTMLElement;
     private icon: HTMLElement;
     private list: HTMLElement
-    sigLike = new Signal<void>();
+    private ul: HTMLElement;
+    sigLike = new Signal<Recipe>();
+   
 
     element(): HTMLElement {
         if (!this.el) {
+            this.el = element(`
+                <div class="likes">
+                </div>
+            `);
             this.icon = element(`
                 <div class="likes__field">
                     <svg class="likes__icon">
@@ -22,30 +29,34 @@ export class Likes implements Widget {
             });
             this.list = element(`
                 <div class="likes__panel">
-                    <ul class="likes__list">
-                        <!--
-                        <li>
-                            <a class="likes__link" href="#23456">
-                                <figure class="likes__fig">
-                                    <img src="img/test-1.jpg" alt="Test">
-                                </figure>
-                                <div class="likes__data">
-                                    <h4 class="likes__name">Pasta with Tomato ...</h4>
-                                    <p class="likes__author">The Pioneer Woman</p>
-                                </div>
-                            </a>
-                        </li>
-                        -->
-                    </ul>
                 </div>
             `);
-            this.el = element(`
-                <div class="likes">
-                </div>
+            this.ul = element(`
+                <ul class="likes__list">
+                </ul>
             `);
-            this.el.appendChild(this.icon);
-            this.el.appendChild(this.list);
+            
+           this.el.appendChild(this.icon);
+           this.el.appendChild(this.list);
+           this.list.appendChild(this.ul);
+
         }
         return this.el;
+    }
+    addRecipeHeart(r: Recipe): void {
+        const liked = element(`
+            <li>
+                <a class="likes__link" href="${r.recipe_id}">
+                    <figure class="likes__fig">
+                        <img src="${r.image_url}" alt="Test">
+                    </figure>
+                    <div class="likes__data">
+                        <h4 class="likes__name">${r.title}</h4>
+                        <p class="likes__author">${r.publisher}</p>
+                    </div>
+                </a>
+            </li>
+        `);
+        this.ul.appendChild(liked);
     }
 }

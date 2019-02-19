@@ -10,14 +10,23 @@ const app = new App();
 container.prepend(ui.element());
 
 ui.getHeader().sigSearch.connect(async query => {
-    console.log(query);
     const results = await app.search(query);
-    console.log(results);
     ui.getResults().setResults(results);
 });
 
-ui.getResults().sigRecipeClicked.connect(result => {
-    console.log(result.title);
+ui.getResults().sigRecipeClicked.connect(async result => {
+    await app.getRecipe(result);
+    const recipe = await app.getRecipe(result);
+    ui.getRecipes().setRecipe(recipe);
+    ui.getRecipes().updateHtml();
+});
+
+ui.getRecipes().sigAddShoppingButtonClicked.connect(recipe => {
+    ui.getShopList().addRecipe(recipe);
+});
+
+ui.getRecipes().sigHeartClicked.connect(recipe => {
+    ui.getHeader().getLikes().addRecipeHeart(recipe);
 });
 
 // import Search from './models/Search';

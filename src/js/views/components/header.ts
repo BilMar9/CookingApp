@@ -11,6 +11,10 @@ export class Header implements Widget {
     private likes: Likes;
     sigSearch = new Signal<string>();
     sigLike = new Signal<void>();
+    
+    getLikes(): Likes {
+        return this.likes;
+    }
 
     element(): HTMLElement {
         if(!this.el) {
@@ -27,8 +31,8 @@ export class Header implements Widget {
                 this.sigLike.emit();
             });
             this.el.appendChild(this.likes.element());
-        
         }
         return this.el;
     }
 }
+   

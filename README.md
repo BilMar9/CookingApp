@@ -19,19 +19,19 @@ We will be using [Feature branching](https://www.atlassian.com/git/tutorials/com
 - [x] *create a pull request afterwards and add me as reviewer*
 ## Lesson 2: Application structure & TypeScript
 In this lesson, we will try to make the current application a bit more readable and easy to understand. We will do a bit of refactoring. Refactoring is much easier with a higher level language than pure javascript. Read more about [TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html).
-- [ ] *go through https://scrimba.com/g/gintrototypescript*
-- [ ] *introduce TypeScript into the Forkify project*
-- [ ] *turn all .js files into .ts files and make the project correctly compile bundled js just like in previous lesson*
-- [ ] *run compiled TypeScript application and make sure everything runs*
+- [x] *go through https://scrimba.com/g/gintrototypescript*
+- [x] *introduce TypeScript into the Forkify project*
+- [x] *turn all .js files into .ts files and make the project correctly compile bundled js just like in previous lesson*
+- [x] *run compiled TypeScript application and make sure everything runs*
 ## Lesson 3: The new UI
 In branch `example/newUi` you'll find two new components:
 * interface *Widget*, which simply forces the class which implements it to have an element() method which creates content injectible into DOM: HTMLElement
 * helper function *element()*, which takes string as input and outputs - again - HTMLElement
 Both of these two will form the core building blocks of our new UI.
-- [ ] *see example/newUi*
-- [ ] *understand the concept of Widget and element()*
-- [ ] *split the current Ui into independent building blocks, such as Header, Footer, LeftPanel, MiddlePanel, RightPanel or similar*
-- [ ] *for each of the above mentioned - turn them into new Ui => make them implement Widget and make them look the same as the original UI*
+- [x] *see example/newUi*
+- [x] *understand the concept of Widget and element()*
+- [x] *split the current Ui into independent building blocks, such as Header, Footer, LeftPanel, MiddlePanel, RightPanel or similar*
+- [x] *for each of the above mentioned - turn them into new Ui => make them implement Widget and make them look the same as the original UI*
 - [ ] *for each of the above mentioned - when done, create a PR into master*
 ## Lesson 4: Bind Ui and App
 We have successfully implemented the new UI based on the Widget interface building blocks. Now we need to make it working again. We will be using the so called Signal-Slot pattern.

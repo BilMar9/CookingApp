@@ -2,6 +2,7 @@ import { Widget, element } from "./widget";
 import { Signal } from "../../util/signal";
 
 export interface Result {
+
     recipe_id: number;
     image_url: string;
     title: string;
@@ -24,10 +25,8 @@ export class Results implements Widget {
 
     setResults(results: Result[]): void {
         this.el.innerHTML = "";
-        console.log(results.length);
         results.forEach(r => {
-            const recipe = 
-            element(`
+            const recipe = element(`
                 <ul class="results__list">
                     <li>
                         <a class="results__link results__link--active" href="#${r.recipe_id}">
@@ -47,5 +46,26 @@ export class Results implements Widget {
             });
             this.el.appendChild(recipe);
         });
+    
+        const pagesBtn = element(`
+            <div class="results__pages">
+                <button class="btn-inline results__btn--prev">
+                    <svg class="search__icon">
+                        <use href="img/icons.svg#icon-triangle-left"></use>
+                    </svg>
+                    <span>Page 1</span>
+                </button>
+                <button class="btn-inline results__btn--next">
+                    <span>Page 3</span>
+                    <svg class="search__icon">
+                        <use href="img/icons.svg#icon-triangle-right"></use>
+                    </svg>
+                </button>
+            </div>
+        `);
+        pagesBtn.addEventListener("click", () => {
+            console.log("Clicked Btn Page");
+        });
+        this.el.appendChild(pagesBtn);
     }
 }
