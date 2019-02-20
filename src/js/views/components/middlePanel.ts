@@ -177,25 +177,3 @@ export class Recipes implements Widget {
         this.el.appendChild(recipeDirections);
     };
 }
-
-
-// const renderButtons = (page: number, numResults: number, resPerPage: number) => {
-//     const pages = Math.ceil(numResults / resPerPage);
-
-//     let button;
-//     if (page === 1 && pages > 1) {
-//         // Only button to go to next page
-//         button = createButton(page, 'next');
-//     } else if (page < pages) {
-//         // Both buttons
-//         button = `
-//             ${createButton(page, 'prev')}
-//             ${createButton(page, 'next')}
-//         `;
-//     } else if (page === pages && pages > 1) {
-//         // Only button to go to prev page
-//         button = createButton(page, 'prev');
-//     }
-
-//     elements.searchResPages.insertAdjacentHTML('afterbegin', button);
-// };

@@ -104,30 +104,6 @@ export class LeftPanel implements Widget {
                 this.el.appendChild(recipe);
             });
         }
-        // this.el.innerHTML = "";
-        // this.results.slice(this.currentPage * this.resultsPerPage, this.currentPage * this.resultsPerPage + this.resultsPerPage)
-        // const currentPageResults = this.results.slice(this.currentPage, this.resultsPerPage + 1);
-        // currentPageResults.forEach(r => {
-        //     const recipe = element(`
-        //         <ul class="results__list">
-        //             <li>
-        //                 <a class="results__link results__link--active" href="#${r.recipe_id}">
-        //                     <figure class="results__fig">
-        //                         <img src="${r.image_url}" alt="Test">
-        //                     </figure>
-        //                     <div class="results__data">
-        //                         <h4 class="results__name">${r.title}</h4>
-        //                         <p class="results__author">${r.publisher}</p>
-        //                     </div>
-        //                 </a>
-        //             </li>
-        //         </ul>
-        //     `);
-        //     recipe.addEventListener("click", () => {
-        //         this.sigRecipeClicked.emit(r);
-        //     });
-        //     this.el.appendChild(recipe);
-        // });
     
         const pagesBtn = element(`
             <div class="results__pages"></div>
@@ -164,19 +140,3 @@ export class LeftPanel implements Widget {
         pagesBtn.appendChild(rightBtn);
     }
 }
-
-
-//             <div class="results__pages">
-//                 <button class="btn-inline results__btn--${this.type}" data-goto=${this.type === 'prev' ? this.currentPage - 1 : this.currentPage + 1}>
-//                     <span>Page ${this.type === 'prev' ? this.currentPage - 1 : this.currentPage + 1}</span>
-//                     <svg class="search__icon">
-//                         <use href="img/icons.svg#icon-triangle-${this.type === 'prev' ? 'left' : 'right'}"></use>
-//                     </svg>
-//                 </button>
-//                 <button class="btn-inline results__btn--next">
-//                     <span>Page 3</span>
-//                     <svg class="search__icon">
-//                         <use href="img/icons.svg#icon-triangle-right"></use>
-//                     </svg>
-//                 </button>
-//             </div>
