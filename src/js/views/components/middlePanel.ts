@@ -4,11 +4,11 @@ import { Recipe } from "./app";
 
 export class Recipes implements Widget {
 
+    sigAddShoppingButtonClicked = new Signal<Recipe>();
+    sigHeartClicked = new Signal<Recipe>();
     private el: HTMLElement;
     private recipe: Recipe;
     time: number;
-    sigAddShoppingButtonClicked = new Signal<Recipe>();
-    sigHeartClicked = new Signal<Recipe>();
 
     element(): HTMLElement {
         if(!this.el) {
@@ -177,3 +177,25 @@ export class Recipes implements Widget {
         this.el.appendChild(recipeDirections);
     };
 }
+
+
+// const renderButtons = (page: number, numResults: number, resPerPage: number) => {
+//     const pages = Math.ceil(numResults / resPerPage);
+
+//     let button;
+//     if (page === 1 && pages > 1) {
+//         // Only button to go to next page
+//         button = createButton(page, 'next');
+//     } else if (page < pages) {
+//         // Both buttons
+//         button = `
+//             ${createButton(page, 'prev')}
+//             ${createButton(page, 'next')}
+//         `;
+//     } else if (page === pages && pages > 1) {
+//         // Only button to go to prev page
+//         button = createButton(page, 'prev');
+//     }
+
+//     elements.searchResPages.insertAdjacentHTML('afterbegin', button);
+// };

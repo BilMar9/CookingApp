@@ -1,6 +1,6 @@
 import { Widget, element } from "./widget";
 import { Header } from "./header";
-import { Results } from "./results";
+import { LeftPanel } from "./leftPanel";
 import { Recipes } from "./middlePanel";
 import { Shopping } from "./shoppingList";
 
@@ -8,7 +8,7 @@ export class Ui implements Widget {
 
     private el: HTMLElement;
     private header: Header;
-    private results: Results;
+    private results: LeftPanel;
     private recipe: Recipes;
     private shopping: Shopping;
 
@@ -17,7 +17,7 @@ export class Ui implements Widget {
             this.el = element(`<div class="container"></div>`);
 
             this.header = new Header();
-            this.results = new Results();
+            this.results = new LeftPanel();
             this.recipe = new Recipes();
             this.shopping = new Shopping();
 
@@ -33,7 +33,7 @@ export class Ui implements Widget {
         return this.header;
     }
 
-    getResults(): Results {
+    getResults(): LeftPanel {
         return this.results;
     }
 
