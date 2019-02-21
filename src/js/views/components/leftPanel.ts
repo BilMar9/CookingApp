@@ -16,7 +16,8 @@ export class LeftPanel implements Widget {
     private results: Result[];
     private resultsPerPage = 6;
     private currentPage = 1;
-    type: string
+    type: string;
+    limit: number
 
     element(): HTMLElement {
         if (!this.el) {
@@ -37,6 +38,7 @@ export class LeftPanel implements Widget {
         if (this.currentPage === 1) {
             const currentPageResults = this.results.slice(this.currentPage, this.resultsPerPage + 1);
             currentPageResults.forEach(r => {
+
             const recipe = element(`
                 <ul class="results__list">
                     <li>
