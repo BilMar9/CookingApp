@@ -4,11 +4,11 @@ import { Recipe } from "./app";
 
 export class Recipes implements Widget {
 
+    sigAddShoppingButtonClicked = new Signal<Recipe>();
+    sigHeartClicked = new Signal<Recipe>();
     private el: HTMLElement;
     private recipe: Recipe;
     time: number;
-    sigAddShoppingButtonClicked = new Signal<Recipe>();
-    sigHeartClicked = new Signal<Recipe>();
 
     element(): HTMLElement {
         if(!this.el) {
