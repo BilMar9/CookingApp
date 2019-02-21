@@ -24,22 +24,21 @@ export class Recipes implements Widget {
         this.updateTime();
     };
     updateServingsPlus () {
-        // Servings
         const newServings = 'dec' ? this.recipe.calcServings + 1 : this.recipe.calcServings - 1;
-        // Ingredients
         this.recipe.ingredients.forEach((ing: { count: number} ) => {
             ing.count *= (newServings / this.recipe.calcServings);
         });
         this.recipe.calcServings = newServings;
     }
     updateServingsMinus () {
-        // Servings
-        const newServings = 'dec' ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
-        // Ingredients
-        this.recipe.ingredients.forEach((ing: { count: number} ) => {
-            ing.count *= (newServings / this.recipe.calcServings);
+        const minServingsLimit = this.recipe.calcServings === 1;
+        if(!minServingsLimit) {
+            const newServings = 'dec' ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
+            this.recipe.ingredients.forEach((ing: { count: number } ) => {
+                ing.count *= (newServings / this.recipe.calcServings);
         });
         this.recipe.calcServings = newServings;
+        }
     }
     updateTime() {
         const numIng = this.recipe.ingredients.length;
