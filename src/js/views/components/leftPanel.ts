@@ -1,5 +1,6 @@
 import { Widget, element } from "./widget";
 import { Signal } from "../../util/signal";
+import { Recipes } from "./middlePanel";
 
 export interface Result {
 
@@ -14,8 +15,8 @@ export class LeftPanel implements Widget {
     sigRecipeClicked = new Signal<Result>();
     private el: HTMLElement;
     private results: Result[];
-    private resultsPerPage = 6;
-    private currentPage = 1;
+    private resultsPerPage = 8;
+    private currentPage = 0;
     type: string;
     limit: number
 
@@ -33,12 +34,56 @@ export class LeftPanel implements Widget {
         this.updateLeftPanel();
     }
 
+    addButton () {
+        const maxPageLimit = Math.ceil(this.results.length / this.resultsPerPage);
+        const firstPageDisabled = !this.currentPage;
+        const lastPageDisabled = this.currentPage === maxPageLimit - 1;
+        const pagesBtn = element(`
+            <div class="results__pages"></div>
+        `);
+        
+        if(!firstPageDisabled) {
+            const leftBtn = element(`
+                <button class="btn-inline results__btn--prev" ${firstPageDisabled ? "disabled" : ""}>
+                    <span>Page ${this.currentPage}</span>
+                    <svg class="search__icon">
+                        <use href="img/icons.svg#icon-triangle-left"></use>
+                    </svg>
+                </button>
+            `);
+        leftBtn.addEventListener("click", () => {
+            this.currentPage = this.currentPage - 1;
+            this.updateLeftPanel();
+        });
+
+            pagesBtn.appendChild(leftBtn);
+        }
+        if(!lastPageDisabled) {
+            const rightBtn = element(`
+                <button class="btn-inline results__btn--next" ${lastPageDisabled ? "disabled" : ""}>
+                    <span>Page ${this.currentPage + 2}</span>
+                    <svg class="search__icon">
+                        <use href="img/icons.svg#icon-triangle-right"></use>
+                    </svg>
+                </button>
+            `);
+        rightBtn.addEventListener("click", () => {
+            this.currentPage = this.currentPage + 1;
+            this.updateLeftPanel();
+        });
+        pagesBtn.appendChild(rightBtn);
+        }
+        this.el.appendChild(pagesBtn);
+    }
+
     private updateLeftPanel() {
         this.el.innerHTML = "";
-        if (this.currentPage === 1) {
-            const currentPageResults = this.results.slice(this.currentPage, this.resultsPerPage + 1);
-            currentPageResults.forEach(r => {
 
+        const start = this.currentPage * this.resultsPerPage;
+        const end = start + this.resultsPerPage;
+        const currentPageResults = this.results.slice(start, end);
+
+        currentPageResults.forEach(r => {
             const recipe = element(`
                 <ul class="results__list">
                     <li>
@@ -47,7 +92,8 @@ export class LeftPanel implements Widget {
                                 <img src="${r.image_url}" alt="Test">
                             </figure>
                             <div class="results__data">
-                                <h4 class="results__name">${r.title}</h4>
+                                <h4 class="results__name">${r.title}</h4>  
+                                <!-- r.title.split('').length > 17 ? r.title.substring(0, 16) : r.title -->
                                 <p class="results__author">${r.publisher}</p>
                             </div>
                         </a>
@@ -59,86 +105,6 @@ export class LeftPanel implements Widget {
             });
             this.el.appendChild(recipe);
         });
-        } else if (this.currentPage === 2) {
-            const currentPageResults = this.results.slice(this.currentPage * this.resultsPerPage, this.currentPage * this.resultsPerPage + this.resultsPerPage);
-            currentPageResults.forEach(r => {
-                const recipe = element(`
-                    <ul class="results__list">
-                        <li>
-                            <a class="results__link results__link--active" href="#${r.recipe_id}">
-                                <figure class="results__fig">
-                                    <img src="${r.image_url}" alt="Test">
-                                </figure>
-                                <div class="results__data">
-                                    <h4 class="results__name">${r.title}</h4>
-                                    <p class="results__author">${r.publisher}</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                `);
-                recipe.addEventListener("click", () => {
-                    this.sigRecipeClicked.emit(r);
-                });
-                this.el.appendChild(recipe);
-            });
-        } else {
-            const currentPageResults = this.results.slice(this.currentPage * this.resultsPerPage, this.currentPage * this.resultsPerPage + this.resultsPerPage);
-            currentPageResults.forEach(r => {
-                const recipe = element(`
-                    <ul class="results__list">
-                        <li>
-                            <a class="results__link results__link--active" href="#${r.recipe_id}">
-                                <figure class="results__fig">
-                                    <img src="${r.image_url}" alt="Test">
-                                </figure>
-                                <div class="results__data">
-                                    <h4 class="results__name">${r.title}</h4>
-                                    <p class="results__author">${r.publisher}</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                `);
-                recipe.addEventListener("click", () => {
-                    this.sigRecipeClicked.emit(r);
-                });
-                this.el.appendChild(recipe);
-            });
-        }
-    
-        const pagesBtn = element(`
-            <div class="results__pages"></div>
-        `);
-
-        const leftBtn = element(`
-            <button class="btn-inline results__btn--prev">
-                <span>Page ${this.type === 'prev' ? this.currentPage + 1 : this.currentPage - 1}</span>
-                <svg class="search__icon">
-                    <use href="img/icons.svg#icon-triangle-left"></use>
-                </svg>
-            </button>
-        `);
-        leftBtn.addEventListener("click", () => {
-            this.currentPage = this.currentPage - 1;
-            this.updateLeftPanel();
-        });
-
-        const rightBtn = element(`
-            <button class="btn-inline results__btn--next">
-                <span>Page ${this.type === 'next' ? this.currentPage - 1 : this.currentPage + 1}</span>
-                <svg class="search__icon">
-                    <use href="img/icons.svg#icon-triangle-right"></use>
-                </svg>
-            </button>
-        `);
-        rightBtn.addEventListener("click", () => {
-            this.currentPage = this.currentPage + 1;
-            this.updateLeftPanel();
-        });
-
-        this.el.appendChild(pagesBtn);
-        pagesBtn.appendChild(leftBtn);
-        pagesBtn.appendChild(rightBtn);
+        this.addButton(); 
     }
 }
