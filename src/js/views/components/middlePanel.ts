@@ -2,6 +2,11 @@ import { Widget, element } from "./widget";
 import { Signal } from "../../util/signal";
 import { Recipe } from "./app";
 
+export enum Servings {
+      PLUS,
+      MINUS,
+    }
+
 export class Recipes implements Widget {
 
     sigAddShoppingButtonClicked = new Signal<Recipe>();
@@ -23,23 +28,25 @@ export class Recipes implements Widget {
         this.recipe = r;
         this.updateTime();
     };
-    updateServingsPlus () {
-        const newServings = 'dec' ? this.recipe.calcServings + 1 : this.recipe.calcServings - 1;
-        this.recipe.ingredients.forEach((ing: { count: number} ) => {
-            ing.count *= (newServings / this.recipe.calcServings);
-        });
-        this.recipe.calcServings = newServings;
-    }
-    updateServingsMinus () {
-        const minServingsLimit = this.recipe.calcServings === 1;
-        if(!minServingsLimit) {
-            const newServings = 'dec' ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
-            this.recipe.ingredients.forEach((ing: { count: number } ) => {
-                ing.count *= (newServings / this.recipe.calcServings);
-        });
-        this.recipe.calcServings = newServings;
+
+    updateServings(value: Servings) {
+        if (value === Servings.MINUS) {
+            const newServings = this.recipe.calcServings - 1;
+            
+            this.recipe.ingredients.forEach((ing) => {
+            ing.count = ing.count * (newServings / this.recipe.calcServings);
+            });
+            this.recipe.calcServings = newServings;
+        } else {
+            const newServings = this.recipe.calcServings + 1;
+            
+            this.recipe.ingredients.forEach(ing => {
+                ing.count = ing.count * (newServings / this.recipe.calcServings);
+            });
+            this.recipe.calcServings = newServings;
         }
     }
+
     updateTime() {
         const numIng = this.recipe.ingredients.length;
         const periods = Math.ceil(numIng / 3);
@@ -76,7 +83,7 @@ export class Recipes implements Widget {
             
         `);
         plusBtn.addEventListener("click", () => {
-            this.updateServingsPlus();
+            this.updateServings(Servings.PLUS);
             this.updateHtml();
         });
 
@@ -88,7 +95,7 @@ export class Recipes implements Widget {
             </button>
         `);
         minusBtn.addEventListener("click", () => {
-            this.updateServingsMinus();
+            this.updateServings(Servings.MINUS);
             this.updateHtml();
         });
         const recipeDetails = element(`
@@ -120,7 +127,7 @@ export class Recipes implements Widget {
                     <svg class="recipe__icon">
                         <use href="img/icons.svg#icon-check"></use>
                     </svg>
-                    <div class="recipe__count">${i.count}</div>
+                    <div class="recipe__count">${i.count.toFixed(2)}</div>
                     <div class="recipe__ingredient">
                         <span class="recipe__unit">${i.unit}</span>
                         ${i.name}
