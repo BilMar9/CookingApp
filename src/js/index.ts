@@ -10,11 +10,13 @@ const app = new App();
 container.prepend(ui.element());
 
 ui.getHeader().sigSearch.connect(async query => {
+    ui.getResults().addLoaderButton();
     const results = await app.search(query);
     ui.getResults().setResults(results);
 });
 
 ui.getResults().sigRecipeClicked.connect(async result => {
+    ui.getRecipes().addLoaderButton();
     await app.getRecipe(result);
     const recipe = await app.getRecipe(result);
     ui.getRecipes().setRecipe(recipe);

@@ -5,12 +5,13 @@ import { Signal } from "../../util/signal";
 
 export class Header implements Widget {
 
+    sigSearch = new Signal<string>();
+    sigLike = new Signal<void>();
+    sigLoaderLP = new Signal<void>();
     private el: HTMLElement;
     private logo: HTMLElement;
     private searchForm: SearchForm;
     private likes: Likes;
-    sigSearch = new Signal<string>();
-    sigLike = new Signal<void>();
     
     getLikes(): Likes {
         return this.likes;
@@ -24,6 +25,7 @@ export class Header implements Widget {
             this.searchForm = new SearchForm();
             this.searchForm.sigSearch.connect((query: string) => {
                 this.sigSearch.emit(query);
+                this.sigLoaderLP.emit();
             });
             this.el.appendChild(this.searchForm.element());
             this.likes = new Likes();

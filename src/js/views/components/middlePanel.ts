@@ -6,6 +6,7 @@ export class Recipes implements Widget {
 
     sigAddShoppingButtonClicked = new Signal<Recipe>();
     sigHeartClicked = new Signal<Recipe>();
+    sigMiddlePanelLoader = new Signal<void>();
     private el: HTMLElement;
     private recipe: Recipe;
     time: number;
@@ -23,6 +24,19 @@ export class Recipes implements Widget {
         this.recipe = r;
         this.updateTime();
     };
+
+    addLoaderButton() {
+        const loader = 'loader';
+        const addLoader = element(`
+            <div class="${loader}">
+                <svg>
+                    <use href="img/icons.svg#icon-cw"></use>
+                </svg>
+            </div>
+        `);
+        this.el.appendChild(addLoader);
+    }
+
     updateServingsPlus () {
         // Servings
         const newServings = 'dec' ? this.recipe.calcServings + 1 : this.recipe.calcServings - 1;
@@ -121,7 +135,7 @@ export class Recipes implements Widget {
                     <svg class="recipe__icon">
                         <use href="img/icons.svg#icon-check"></use>
                     </svg>
-                    <div class="recipe__count">${i.count}</div>
+                    <div class="recipe__count">${i.count.toFixed(2)}</div>
                     <div class="recipe__ingredient">
                         <span class="recipe__unit">${i.unit}</span>
                         ${i.name}
