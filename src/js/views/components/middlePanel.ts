@@ -30,21 +30,14 @@ export class Recipes implements Widget {
     };
 
     updateServings(value: Servings) {
-        if (value === Servings.MINUS) {
-            const newServings = this.recipe.calcServings - 1;
-            
-            this.recipe.ingredients.forEach((ing) => {
-            ing.count = ing.count * (newServings / this.recipe.calcServings);
-            });
-            this.recipe.calcServings = newServings;
-        } else {
-            const newServings = this.recipe.calcServings + 1;
-            
-            this.recipe.ingredients.forEach(ing => {
-                ing.count = ing.count * (newServings / this.recipe.calcServings);
-            });
-            this.recipe.calcServings = newServings;
-        }
+        let newServings = value === Servings.MINUS ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
+            if (newServings < 1) {
+                newServings = 1;
+            }   
+        this.recipe.ingredients.forEach((ing) => {
+        ing.count = ing.count * (newServings / this.recipe.calcServings);
+        });
+        this.recipe.calcServings = newServings;
     }
 
     updateTime() {
