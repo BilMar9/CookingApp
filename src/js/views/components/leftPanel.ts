@@ -1,6 +1,5 @@
 import { Widget, element } from "./widget";
 import { Signal } from "../../util/signal";
-import { Recipes } from "./middlePanel";
 
 export interface Result {
 
@@ -13,6 +12,7 @@ export interface Result {
 export class LeftPanel implements Widget {
 
     sigRecipeClicked = new Signal<Result>();
+    sigLeftPanelLoader = new Signal<void>();
     private el: HTMLElement;
     private results: Result[];
     private resultsPerPage = 8;
@@ -32,6 +32,18 @@ export class LeftPanel implements Widget {
     setResults(results: Result[]): void {
         this.results = results;
         this.updateLeftPanel();
+    }
+    
+    addLoaderButton() {
+        const loader = 'loader';
+        const addLoader = element(`
+            <div class="${loader}">
+                <svg>
+                    <use href="img/icons.svg#icon-cw"></use>
+                </svg>
+            </div>
+        `);
+        this.el.appendChild(addLoader);
     }
 
     addButton () {
@@ -102,6 +114,7 @@ export class LeftPanel implements Widget {
             `);
             recipe.addEventListener("click", () => {
                 this.sigRecipeClicked.emit(r);
+                this.sigLeftPanelLoader.emit();
             });
             this.el.appendChild(recipe);
         });

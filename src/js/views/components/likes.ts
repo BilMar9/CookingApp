@@ -4,12 +4,11 @@ import { Recipe } from "./app";
 
 export class Likes implements Widget {
 
+    sigLike = new Signal<Recipe>();
     private el: HTMLElement;
     private icon: HTMLElement;
     private list: HTMLElement
     private ul: HTMLElement;
-    sigLike = new Signal<Recipe>();
-   
 
     element(): HTMLElement {
         if (!this.el) {

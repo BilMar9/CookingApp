@@ -40,6 +40,18 @@ export class Recipes implements Widget {
         this.recipe.calcServings = newServings;
     }
 
+    addLoaderButton() {
+        const loader = 'loader';
+        const addLoader = element(`
+            <div class="${loader}">
+                <svg>
+                    <use href="img/icons.svg#icon-cw"></use>
+                </svg>
+            </div>
+        `);
+        this.el.appendChild(addLoader);
+    }
+
     updateTime() {
         const numIng = this.recipe.ingredients.length;
         const periods = Math.ceil(numIng / 3);
