@@ -6,7 +6,6 @@ export class Recipes implements Widget {
 
     sigAddShoppingButtonClicked = new Signal<Recipe>();
     sigHeartClicked = new Signal<Recipe>();
-    sigMiddlePanelLoader = new Signal<void>();
     private el: HTMLElement;
     private recipe: Recipe;
     time: number;
