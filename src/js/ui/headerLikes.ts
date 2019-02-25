@@ -1,8 +1,8 @@
-import { Widget, element } from "./widget";
-import { Signal } from "../../util/signal";
-import { Recipe } from "./app";
+import { Widget, element } from "../util/widget";
+import { Signal } from "../util/signal";
+import { Recipe } from "../index";
 
-export class Likes implements Widget {
+export class HeaderLikes implements Widget {
 
     sigLike = new Signal<Recipe>();
     private el: HTMLElement;

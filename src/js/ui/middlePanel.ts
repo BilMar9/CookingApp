@@ -1,13 +1,13 @@
-import { Widget, element } from "./widget";
-import { Signal } from "../../util/signal";
-import { Recipe } from "./app";
+import { Widget, element } from "../util/widget";
+import { Signal } from "../util/signal";
+import { Recipe } from "../index";
 
 export enum Servings {
       PLUS,
       MINUS,
     }
 
-export class Recipes implements Widget {
+export class MiddlePanel implements Widget {
 
     sigAddShoppingButtonClicked = new Signal<Recipe>();
     sigHeartClicked = new Signal<Recipe>();

@@ -1,16 +1,16 @@
-import { Widget, element } from "./widget";
+import { Widget, element } from "../util/widget";
 import { Header } from "./header";
 import { LeftPanel } from "./leftPanel";
-import { Recipes } from "./middlePanel";
-import { Shopping } from "./shoppingList";
+import { MiddlePanel } from "./middlePanel";
+import { RightPanel } from "./rightPanel";
 
 export class Ui implements Widget {
 
     private el: HTMLElement;
     private header: Header;
     private results: LeftPanel;
-    private recipe: Recipes;
-    private shopping: Shopping;
+    private recipe: MiddlePanel;
+    private shopping: RightPanel;
 
     element(): HTMLElement {
         if(!this.el) {
@@ -18,8 +18,8 @@ export class Ui implements Widget {
 
             this.header = new Header();
             this.results = new LeftPanel();
-            this.recipe = new Recipes();
-            this.shopping = new Shopping();
+            this.recipe = new MiddlePanel();
+            this.shopping = new RightPanel();
 
             this.el.append(this.header.element());
             this.el.append(this.results.element());
@@ -37,11 +37,11 @@ export class Ui implements Widget {
         return this.results;
     }
 
-    getRecipes(): Recipes {
+    getRecipes(): MiddlePanel {
         return this.recipe;
     }
 
-    getShopList(): Shopping {
+    getShopList(): RightPanel {
         return this.shopping;
     }
 }
