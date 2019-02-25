@@ -1,7 +1,7 @@
-import { Widget, element } from "./widget";
-import { Signal } from "../../util/signal";
+import { Widget, element } from "../util/widget";
+import { Signal } from "../util/signal";
 
-export class SearchForm implements Widget {
+export class HeaderSearchForm implements Widget {
 
     private el: HTMLElement;
     private button: HTMLElement;

@@ -1,7 +1,7 @@
-import { Widget, element } from "./widget";
-import { SearchForm } from "./searchForm";
-import { Likes } from "./likes";
-import { Signal } from "../../util/signal";
+import { Widget, element } from "../util/widget";
+import { HeaderSearchForm } from "./headerSearchForm";
+import { HeaderLikes } from "./headerLikes";
+import { Signal } from "../util/signal";
 
 export class Header implements Widget {
 
@@ -9,10 +9,10 @@ export class Header implements Widget {
     sigLike = new Signal<void>();
     private el: HTMLElement;
     private logo: HTMLElement;
-    private searchForm: SearchForm;
-    private likes: Likes;
+    private searchForm: HeaderSearchForm;
+    private likes: HeaderLikes;
     
-    getLikes(): Likes {
+    getLikes(): HeaderLikes {
         return this.likes;
     }
 
@@ -21,12 +21,12 @@ export class Header implements Widget {
             this.el = element(`<header class="header"></header>`);
             this.logo = element(`<img src="img/logo.png" alt="Logo" class="header__logo">`);
             this.el.appendChild(this.logo);
-            this.searchForm = new SearchForm();
+            this.searchForm = new HeaderSearchForm();
             this.searchForm.sigSearch.connect((query: string) => {
                 this.sigSearch.emit(query);
             });
             this.el.appendChild(this.searchForm.element());
-            this.likes = new Likes();
+            this.likes = new HeaderLikes();
             this.likes.sigLike.connect(() => {
                 this.sigLike.emit();
             });

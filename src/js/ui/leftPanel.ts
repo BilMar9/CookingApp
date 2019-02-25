@@ -1,13 +1,6 @@
-import { Widget, element } from "./widget";
-import { Signal } from "../../util/signal";
-
-export interface Result {
-
-    recipe_id: number;
-    image_url: string;
-    title: string;
-    publisher: string;
-}
+import { Widget, element } from "../util/widget";
+import { Signal } from "../util/signal";
+import { Result } from "../index";
 
 export class LeftPanel implements Widget {
 

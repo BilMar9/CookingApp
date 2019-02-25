@@ -1,5 +1,5 @@
-import { Result } from "./leftPanel";
-import { Recipe } from "./app";
+import { Result } from "../index";
+import { Recipe } from "../index";
 
 export const exampleResults: Result[] = [
     {

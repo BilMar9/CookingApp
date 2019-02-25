@@ -1,7 +1,7 @@
-import { Widget, element } from "./widget";
-import { Recipe, IngredientItem, App } from "./app";
+import { Widget, element } from "../util/widget";
+import { Recipe, IngredientItem } from "../index";
 
-export class Shopping implements Widget {
+export class RightPanel implements Widget {
 
     private el: HTMLElement;
     private copyright: HTMLElement;
