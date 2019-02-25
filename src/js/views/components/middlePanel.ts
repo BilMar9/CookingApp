@@ -28,6 +28,7 @@ export class Recipes implements Widget {
         this.recipe = r;
         this.updateTime();
     };
+<<<<<<< HEAD
 
     addLoaderButton() {
         const loader = 'loader';
@@ -41,6 +42,9 @@ export class Recipes implements Widget {
         this.el.appendChild(addLoader);
     }
 
+=======
+  
+>>>>>>> c1ce1d9f0179e91ae7dff0475195a92b831dea5d
     updateServings(value: Servings) {
         let newServings = value === Servings.MINUS ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
         if (newServings < 1) {
