@@ -29,11 +29,23 @@ export class Recipes implements Widget {
         this.updateTime();
     };
 
+    addLoaderButton() {
+        const loader = 'loader';
+        const addLoader = element(`
+            <div class="${loader}">
+                <svg>
+                    <use href="img/icons.svg#icon-cw"></use>
+                </svg>
+            </div>
+        `);
+        this.el.appendChild(addLoader);
+    } 
+  
     updateServings(value: Servings) {
         let newServings = value === Servings.MINUS ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
-            if (newServings < 1) {
-                newServings = 1;
-            }   
+        if (newServings < 1) {
+            newServings = 1;
+        }
         this.recipe.ingredients.forEach((ing) => {
         ing.count = ing.count * (newServings / this.recipe.calcServings);
         });
