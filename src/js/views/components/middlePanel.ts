@@ -28,7 +28,7 @@ export class Recipes implements Widget {
         this.recipe = r;
         this.updateTime();
     };
-
+  
     updateServings(value: Servings) {
         let newServings = value === Servings.MINUS ? this.recipe.calcServings - 1 : this.recipe.calcServings + 1;
             if (newServings < 1) {

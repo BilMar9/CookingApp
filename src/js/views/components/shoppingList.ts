@@ -65,7 +65,7 @@ export class Shopping implements Widget {
             const shoppingItem = element(`
                 <li class="shopping__item">
                     <div class="shopping__count">
-                        <input type="text" value="${ingredient.count}" step="1">
+                        <input type="text" value="${ingredient.count.toFixed(2)}" step="1">
                         <p>${this.shortener.get(ingredient.unit) ? this.shortener.get(ingredient.unit) : ""}</p>
                     </div>
                     <p class="shopping__description">${ingredient.name}</p>
